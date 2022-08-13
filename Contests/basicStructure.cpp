@@ -5,20 +5,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+#define len(t) (int)t.size()
+#define forn(i, n) for(int i = 0;i < int(n);i++)
+
+using ll = long long int;
+#define ll long long int
+
+
+ll binpow(ll a, ll b, ll c){
+    if(b == 0) return 1;
+    ll t = (a, b/2, c);
+    if(b % 2) return (((t * t)%c * a) + c)%c;
+    return ((t * t)%c + c)%c;
+}
+
 int main(){
     #ifndef ONLINE_JUDGE
     freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
     freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
     #endif
 
-    int n = 10;
-    bool *arr = new bool[n + 1]();
-    for(int i = 0;i < n;i++){
-        cout << arr[i] << endl;
-    }
-    
-    arr[1] = true;
-    cout << arr[1] << endl;
+    // int n = -1e6 +1;
+    // cout << n << endl;
 
+    // ll a = binpow(2, 200, 1e18);
+    // cout << (1LL << 63)   << endl;
+    int a = 'c' - '0';
+    cout << a << endl;
     return 0;
 }

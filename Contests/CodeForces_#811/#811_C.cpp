@@ -5,25 +5,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define forn(i, n) for(int i = 0;i < int(n);i++)
+
 void work(){
-    int n;
-    cin >> n;
-    int curr = 9;
-    stack<int> st;
-    while(1){
-        if(n <= curr){
-            st.push(n);
-            break;
+    // My Successful Attempt
+    // int n;
+    // cin >> n;
+    // int curr = 9;
+    // stack<int> st;
+    // while(1){
+    //     if(n <= curr){
+    //         st.push(n);
+    //         break;
+    //     }
+    //     st.push(curr);
+    //     n -= curr;
+    //     curr--;
+    // }
+    // while(!st.empty()){
+    //     cout << st.top();
+    //     st.pop();
+    // }
+    // cout << endl;
+
+    // Editor Solution
+    int s;
+    cin >> s;
+    string ans;
+    for(int i = 9;i >= 1;i--){
+        if(s >= i){
+            ans = char(i + '0') + ans;
+            s -= i;
         }
-        st.push(curr);
-        n -= curr;
-        curr--;
     }
-    while(!st.empty()){
-        cout << st.top();
-        st.pop();
-    }
-    cout << endl;
+    cout << ans << endl;
 }
 
 int main(){

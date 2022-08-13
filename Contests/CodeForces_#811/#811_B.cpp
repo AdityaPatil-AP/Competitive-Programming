@@ -6,6 +6,7 @@
 using namespace std;
 
 void work(){
+    // MY Successful Attempt
     int n;
     cin >> n;
     int *arr = new int[n];
@@ -26,6 +27,9 @@ void work(){
         }
     }
     cout << n - count << endl;
+
+    // Editor's Solution
+    // same as me
 }
 
 int main(){

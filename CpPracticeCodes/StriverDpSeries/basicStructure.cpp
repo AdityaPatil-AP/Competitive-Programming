@@ -7,8 +7,8 @@ using namespace std;
 
 int main(){
     #ifndef ONLINE_JUDGE
-    freopen("E:\\only one folder\\Cp Codes 1\\CpPracticeCodesGithubRepo\\CpPractice\\StriverDpSeries\\input.txt","r", stdin);
-    freopen("E:\\only one folder\\Cp Codes 1\\CpPracticeCodesGithubRepo\\CpPractice\\StriverDpSeries\\output.txt", "w", stdout);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\CpPracticeCodes\\StriverDpSeries\\input.txt","r", stdin);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\CpPracticeCodes\\StriverDpSeries\\output.txt", "w", stdout);
     #endif
 
     int n = 10;
