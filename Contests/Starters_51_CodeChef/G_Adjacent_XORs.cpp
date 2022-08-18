@@ -46,15 +46,57 @@ pair<int,bool> f(int index, int x, vector<int> &arr, vector<pair<int,bool>> &dp)
     return {maxi, false};
 }
 
+int f(int index, int x, vector<int> &arr){
+    vector<pair<int,int>> v1 = {{0, 0}, {0, x}, {x, 0}, {x, x}};
+    // Base Case
+    if(index == 0){
+        return 0;
+    }
+
+    // Possibilities
+    // arr[index] remains the same;
+    int p1 = (arr[index] ^ arr[index - 1]) + f(index - 1, x, arr);
+    arr[index - 1] += x;
+    int p2 = (arr[index] ^ arr[index - 1]) + f(index - 1, x, arr);
+    arr[index - 1] -= x;
+
+    // arr[index] will increase by x;
+    arr[index] += x;
+    int p3 = (arr[index] ^ arr[index - 1]) + f(index - 1, x, arr);
+    arr[index - 1] += x;
+    int p4 = (arr[index] ^ arr[index - 1]) + f(index - 1, x, arr);
+    arr[index - 1] -= x;
+    arr[index] -= x;
+
+    return max(max(p1, p2), max(p3, p4));
+}
+
 void work(){
+    // My try - No conclusive answer
+    // int n, x;
+    // cin >> n >> x;
+    // vector<int> arr(n, 0);
+    // for(int i = 0;i < n;i++){
+    //     cin >> arr[i];
+    // }
+    // vector<pair<int, bool>> dp(n, {-1, 0});
+    // cout << f(n - 1, x, arr, dp).first << endl;
+
+    // My second try;
     int n, x;
     cin >> n >> x;
     vector<int> arr(n, 0);
     for(int i = 0;i < n;i++){
         cin >> arr[i];
     }
-    vector<pair<int, bool>> dp(n, {-1, 0});
-    cout << f(n - 1, x, arr, dp).first << endl;
+    cout << f(n - 1, x, arr) << endl;
+    // for(int i = 0;i < n;i++){
+    //     cout << arr[i] << " ";
+    // }
+    // cout << endl;
+
+    // Editors Solution
+
 }
 
 int main(){

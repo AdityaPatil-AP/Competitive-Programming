@@ -5,32 +5,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define len(t) (int)t.size()
+#define forn(i, n) for(int i = 0;i < int(n);i++)
+
 void work(){
-    // int n;
-    // cin >> n;
-    // int count = 0;
-    // while(n != 0){
-    //     if(n % 2 != 0) count += 1;
-    //     n /= 2;
-    // }
-    // cout << count - 1 << endl;
-
-    // MY thought during upsolving.
-    // Ans - count the no. of set bits
-    // int n;
-    // cin >> n;
-    // int count = 0;
-    // while(n != 0){
-    //     count += (n & 1);
-    //     n /= 2;
-    // }
-    // cout << count - 1 << endl;
-
-    // Editor's Solution
     int n;
     cin >> n;
-    cout << __builtin_popcountll(n) - 1 << endl;
+    if(n % 2){
+        cout << 1 << " ";
+        for(int i = 2;i <= n;i+=2){
+            cout << i + 1 << " " << i << " ";
+        }
+    }
+    else{
+        for(int i = 1;i <= n;i+=2){
+            cout << i + 1 << " " << i << " ";
+        }
+    }
+    cout << endl;
 }
+
 
 int main(){
     #ifndef ONLINE_JUDGE

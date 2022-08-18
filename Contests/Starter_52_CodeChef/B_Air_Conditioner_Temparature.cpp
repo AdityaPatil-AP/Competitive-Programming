@@ -5,20 +5,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+#define MAX 1000010
+int arr[MAX];
+
 void work(){
-    int a, b, c, d;
-    cin >> a >> b >> c >> d;
-    if((a-c) < (b - d)){
-        cout << "FIRST" << endl;
-    }
-    else if((b - d) < (a - c)){
-        cout << "SECOND" << endl;
+   // Air Conditioner Temparature
+    int a, b, c;
+    cin >> a >> b >> c;
+    if(b >= a && b >= c){
+        cout << "Yes" << endl;
     }
     else{
-        cout << "ANY" << endl;
+        cout << "No" << endl;
     }
-    // Tutorial answer
-    // same
+
 }
 
 int main(){
@@ -26,10 +27,14 @@ int main(){
     freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
     freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
     #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int testcase = 1;
     cin >> testcase;
-    for(int m = 1; m <= testcase;m++){
+    for(int i = 0;i < testcase;i++){
         work();
     }
     return 0;
 }
+
+

@@ -5,31 +5,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define mp make_pair
+
 void work(){
-    // int n;
-    // cin >> n;
-    // int count = 0;
-    // while(n != 0){
-    //     if(n % 2 != 0) count += 1;
-    //     n /= 2;
-    // }
-    // cout << count - 1 << endl;
-
-    // MY thought during upsolving.
-    // Ans - count the no. of set bits
-    // int n;
-    // cin >> n;
-    // int count = 0;
-    // while(n != 0){
-    //     count += (n & 1);
-    //     n /= 2;
-    // }
-    // cout << count - 1 << endl;
-
-    // Editor's Solution
+    // Editors Solution
+    // Game Theory - Nim Game;
     int n;
     cin >> n;
-    cout << __builtin_popcountll(n) - 1 << endl;
+    int ans = 0;
+    for(int i = 1;i <= n;i++){
+        int x;
+        cin >> x;
+        if(x & 1){
+            ans ^= (n - i);
+        }
+    }
+    if(ans == 0){
+        cout << "Cook" << endl;
+    }
+    else{
+        cout << "Chef" << endl;
+    }
 }
 
 int main(){

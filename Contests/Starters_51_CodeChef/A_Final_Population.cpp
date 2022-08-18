@@ -9,6 +9,8 @@ void work(){
     int x, y, z;
     cin >> x >> y >> z;
     cout << x - y + z << endl;
+    // tutorial answer
+    // same
 }
 
 int main(){

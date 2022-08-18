@@ -33,5 +33,10 @@ int main(){
     // cout << (1LL << 63)   << endl;
     int a = 'c' - '0';
     cout << a << endl;
+    int x = 5;
+    vector<pair<int,int>> v1 = {{0, 0}, {0, x}, {x, 0}, {x, x}};
+    for(int i = 0;i <= 3;i++){
+        cout << v1[i].first <<  " "  << v1[i].second << endl;
+    }
     return 0;
 }

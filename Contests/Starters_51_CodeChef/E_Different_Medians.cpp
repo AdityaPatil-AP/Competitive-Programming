@@ -6,30 +6,23 @@
 using namespace std;
 
 void work(){
+    // After the contest correct try
     int n;
     cin >> n;
-    vector<int> arr(n, 0);
-    for(int i = 0;i < n;i++){
-        cin >> arr[i];
+    int start = 1, end = n;
+    while(start <= end){
+        if(start == end){
+            cout << start << " ";
+            break;
+        }
+        cout << end << " " << start << " ";
+        start++;
+        end--;
     }
-    map<int, int> mp;
-    for(int i = 0;i < n;i++){
-        mp[arr[i]]++;
-    } 
-    vector<int> freq;
-    for(auto it:mp){
-        freq.push_back(it.second);
-    }
-    sort(freq.begin(), freq.end());
-    if(freq.size() == 1){
-        cout << "YES" << endl;
-    }
-    else if(freq[freq.size() - 1] != freq[freq.size() - 2]){
-        cout << "YES" << endl;
-    }
-    else{
-        cout << "NO" << endl;
-    }
+    cout << endl;
+
+    // Editor Solution
+    // Same as my Solution.
 }
 
 int main(){
