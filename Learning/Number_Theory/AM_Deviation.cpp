@@ -109,23 +109,40 @@ int ncr(int n, int r){
     return fact[n]%PRIME * invfact[r]%PRIME * invfact[n - r]%PRIME;
 }
 
-bool isPrime(int n){
-    if(n == 1) return false;
-    if(n == 2 || n == 3) return true;
-    if(n % 2 == 0 || n % 3 == 0) return false;
-    for(int i = 5;i * i <= n;i = i + 6){
-        if(n % i == 0 || n % (i + 2) == 0){
-            return false;
-        }
-    }
-    return true;
-}
-
 
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+    // AM Deviation - My Wrong Answer
+    // int a, b, c;
+    // cin >> a >> b >> c;
+    // int y = a + c;
+    // int z = 2 * b;
+    // if(y >= z){
+    //     while(y - z > 1){
+    //         y -= 1;
+    //         z += 2;
+    //     }
+    //     cout << abs(y - z) << endl;
+    // }else
+    // {
+    //     while(z - y> 1){
+    //         z -= 2;
+    //         y += 1;
+    //     }
+    //     cout << abs(z - y) << endl;
+    // }
+
+    // Editorial Answer
+    int a, b, c, m = 3;
+    cin >> a >> b >> c;
+    int d = (a + c - 2 * b);
+    // cout << d << endl;
+    // cout << d % m << endl;
+    if((d % m + m)%m == 0){
+        cout << 0 << endl;
+    }
+    else {
+        cout << 1 << endl;
+    }
 }
 
 int main(){

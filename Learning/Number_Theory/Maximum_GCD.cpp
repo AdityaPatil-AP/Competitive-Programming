@@ -94,7 +94,7 @@ void init(){
     fact[0] = 1;
     int i;
     for(i = 1;i < N;i++){
-        fact[i] = i * fact[i - 1];
+        fact[i] = (1ll * i * fact[i - 1])%p;
     }
     i--;
     invfact[i] = power(fact[i], p - 2, p);
@@ -121,11 +121,14 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+    // My Answer
+    ll n, m;
+    cin >> n >> m;
+    if(n % m == 0){
+        cout << "YES" << endl;
+    }
+    else cout << "NO" << endl;
 }
 
 int main(){

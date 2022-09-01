@@ -9,6 +9,7 @@ using namespace std::chrono;
 
 #define mod 1000000007
 #define int long long int
+#define PRIME mod
 
 const int N = 1000000;
 #define pb push_back
@@ -90,13 +91,40 @@ int power(int a, int b, int m){
     return 1ll * (a%m * (power(a, b/2, m)%m * power(a, b/2,m)%m)%m);
 }
 
+// Fermat's little theorem
+int multiplicativeInverse(int b, int modm){
+    return power(b, modm - 2, modm); // Fermat's little theorem
+}
   
+// Factorial and Inverse Factorial in Combinatorics
+#define NCR
+int fact[N], invfact[N];
+void init(){
+    int p = PRIME;
+    fact[0] = 1;
+    int i;
+    for(i = 1;i < N;i++){
+        fact[i] = i * fact[i - 1];
+    }
+    i--;
+    invfact[i] = power(fact[i], p - 2, p);
+    for(i--;i >= 0;i--){
+        invfact[i] = invfact[i + 1] % p * (i + 1) % p;
+    }
+}
+int ncr(int n, int r){
+    if(r > n || n < 0 || r < 0){
+        return 0;
+    }
+    return fact[n]%PRIME * invfact[r]%PRIME * invfact[n - r]%PRIME;
+}
+
 void work(){
     // Utkarsh Gupta Number Theory Video
     // 1st Part - 1) Counting divisors
-    int n;cin >> n;
-    cout << divisors(n) << endl;
-    cout << divisors1(n) << endl;
+    // int n;cin >> n;
+    // cout << divisors(n) << endl;
+    // cout << divisors1(n) << endl;
 
     // Printing divisors for all numbers from 1 to n.
     // Using a vector and use of multiples
@@ -113,21 +141,38 @@ void work(){
 
     // For finding primes numbers in a range we can use
     // Sieve of Eratosthenes
-    sieve(n);
+    // sieve(n);
 
     // GCD of two numbers
-    int a, b;
-    cin >> a >> b;
-    cout << gcd(a, b) << endl;
-    // In-built function
-    cout << __gcd(a, b) << endl;
+    // int a, b;
+    // cin >> a >> b;
+    // cout << gcd(a, b) << endl;
+    // // In-built function
+    // cout << __gcd(a, b) << endl;
 
     // 2nd Part - Modular Arithmetic.
     // Power function
-    int m, p, j;
-    cin >> m >> p >> j;
-    // Binary Exponentiation or Binpow
-    cout << power(m, p, j) << endl;
+    // int m, p, j;
+    // cin >> m >> p >> j;
+    // // Binary Exponentiation or Binpow
+    // cout << power(m, p, j) << endl;
+
+    // How to apply mod while division
+    // int a, b, modm;
+    // cin >> a >> b >> modm; // only if modm is prime
+    // // first result
+    // int res1 = (a/b) % modm;
+    // // Second way
+    // a %= modm;
+    // // multiplicative inverse of b
+    // int inv_b = multiplicativeInverse(b, modm);
+    // int res2 = (a * inv_b) % modm;
+    // cout << res1 << " " << res2 << endl;
+
+    // Part 3 -  Combinatorics.
+    int n, r;
+    cin >> n >> r;
+    cout << ncr(n, r) << endl;
 }
 
 int32_t main(){
@@ -140,6 +185,7 @@ int32_t main(){
     int testcase = 1;
     // cin >> testcase;
     auto start = high_resolution_clock::now();
+    init();
     for(int i = 0;i < testcase;i++){
         work();
     }

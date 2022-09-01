@@ -94,7 +94,7 @@ void init(){
     fact[0] = 1;
     int i;
     for(i = 1;i < N;i++){
-        fact[i] = i * fact[i - 1];
+        fact[i] = (1ll * i * fact[i - 1])%p;
     }
     i--;
     invfact[i] = power(fact[i], p - 2, p);
@@ -123,9 +123,10 @@ bool isPrime(int n){
 
 
 void work(){
+    // My Answer
     int n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    cout << (n - 1)/2 << " " << (n - 1) << endl;
 }
 
 int main(){
@@ -135,6 +136,7 @@ int main(){
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    // init();
     int testcase = 1;
     cin >> testcase;
     for(int i = 0;i < testcase;i++){

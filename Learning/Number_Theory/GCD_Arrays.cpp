@@ -109,23 +109,20 @@ int ncr(int n, int r){
     return fact[n]%PRIME * invfact[r]%PRIME * invfact[n - r]%PRIME;
 }
 
-bool isPrime(int n){
-    if(n == 1) return false;
-    if(n == 2 || n == 3) return true;
-    if(n % 2 == 0 || n % 3 == 0) return false;
-    for(int i = 5;i * i <= n;i = i + 6){
-        if(n % i == 0 || n % (i + 2) == 0){
-            return false;
-        }
-    }
-    return true;
-}
-
 
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+    // Gcd Arrays
+    int l, r, k;
+    cin >> l >> r >> k;
+    int oddno = 0;
+    int start;
+    if(l%2 == 1){ start = l;} 
+    else start = l + 1;
+    for(int i = start;i <= r;i+=2){
+        oddno++;
+    }
+    ((oddno <= k || l == r) && r != 1) ? cout << "YES" : cout << "NO";
+    cout << endl;
 }
 
 int main(){

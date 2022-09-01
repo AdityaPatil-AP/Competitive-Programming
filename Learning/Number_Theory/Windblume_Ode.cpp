@@ -15,9 +15,11 @@ const int N = 1000000;
 #define pb push_back
 
 #define SIEVE 
-int primes[N];
+int primes[N] = {0};
 vector<int> pr;
 void sieve(){
+    primes[0] = 1;
+    primes[1] = 1;
     for(int i = 2;i <= N;i++){
         if(primes[i] == 0){
             pr.pb(i);
@@ -25,7 +27,7 @@ void sieve(){
                 primes[j] = 1;
             }
         }
-        primes[i] ^= 1;
+        // primes[i] ^= 1;
     }
 }
 
@@ -121,11 +123,35 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
+    // Windblume - ode - Me
     int n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    vector<int> arr(n, 0);
+    int sum = 0;
+    for(int i = 0;i < n;i++){
+        cin >> arr[i];
+        sum += arr[i];
+    }
+    if(isPrime(sum)){
+        cout << arr.size() - 1 << endl;
+        bool flag = true;
+        for(int i = 0;i < n;i++){
+            if(flag && arr[i] % 2 == 1){
+                flag = false;
+                continue;
+            }
+            cout << i + 1 << " ";
+        }
+        cout << endl;
+    }
+    else{
+        cout << arr.size() << endl;
+        for(int i = 1;i <= n;i++){
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main(){

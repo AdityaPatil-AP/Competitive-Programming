@@ -123,15 +123,21 @@ bool isPrime(int n){
 
 
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    int ans = 2 * (n - k + 1);
+    for(int i = 2;i <= n - k;i++){
+        ans = (1ll * ans + (n - k + 1 - i) * (i - 1))%mod;
+    }
+    cout << ans << endl;
 }
 
 int main(){
     #ifndef ONLINE_JUDGE
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\input.txt","r", stdin);
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\output.txt", "w", stdout);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

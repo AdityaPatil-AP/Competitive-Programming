@@ -109,23 +109,19 @@ int ncr(int n, int r){
     return fact[n]%PRIME * invfact[r]%PRIME * invfact[n - r]%PRIME;
 }
 
-bool isPrime(int n){
-    if(n == 1) return false;
-    if(n == 2 || n == 3) return true;
-    if(n % 2 == 0 || n % 3 == 0) return false;
-    for(int i = 5;i * i <= n;i = i + 6){
-        if(n % i == 0 || n % (i + 2) == 0){
-            return false;
-        }
-    }
-    return true;
-}
-
 
 void work(){
+    // Marin and Anti-Coprime Permutation
     int n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    if(n % 2 == 1) cout << 0 << endl;
+    else {
+        int ans = 1;
+        for(int i = 1;i <= n/2;i++){
+            ans = (1ll  * (i*i) * ans)%(998244353);
+        }
+        cout << (ans)%mod << endl;
+    }
 }
 
 int main(){

@@ -123,15 +123,46 @@ bool isPrime(int n){
 
 
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+   //  int n;
+   //  cin >> n;
+   //  int countIs = 0, count = 1, prev, countOne = 0, countMore = 0;
+   //  cin >> prev;
+   //  for(int i = 1;i < n;i++){
+   //      int curr;
+   //      cin >> curr;
+   //      if(prev < curr) count++;
+   //      else{
+   //          if(count >= 3) {
+   //              countIs += 1;
+   //              int countelem = (count - 2);
+   //              if(countelem > 1) countOne++;
+   //              else countMore++;
+   //          }
+   //          count = 1;  
+   //      }
+   //      prev = curr;
+   //  }
+   //  if(count >= 3){
+   //      countIs += 1;
+   //      int countelem = (count - 2);
+   //      if(countelem > 1) countOne++;
+   //      else countMore++;
+   //  }
+   // if((countelem > 2 && countIs >= 2) || countIs == 1){
+   //      cout << "Alice" << endl;
+   // }
+   // else{
+   //      cout << "Bob" << endl;
+   // }
+    int x, y, z;
+    cin >> x >> y >> z;
+    cout << 4 * x + 2 * y << endl;
 }
 
 int main(){
     #ifndef ONLINE_JUDGE
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\input.txt","r", stdin);
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\output.txt", "w", stdout);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

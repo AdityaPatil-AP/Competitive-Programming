@@ -125,13 +125,36 @@ bool isPrime(int n){
 void work(){
     int n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    vector<vector<int>> arr(n, vector<int> (5, 0));
+    for(int i = 0;i < n;i++){
+        int j;
+        cin >> j;
+        for(int k = 0;k < j;k++){
+            int input;
+            cin >> input;
+            arr[i][input - 1] = 1;
+        }
+    }
+    bool flag = true;
+    for(int i = 0;i < n - 1;i++){
+        for(int j = i + 1;j < n;j++){
+            for(int k = 0;k <= 4;k++){
+                flag = true;
+                if(arr[i][k] + arr[j][k] >= 1) continue;
+                else{ flag = false; break;}
+            }
+            if(flag) break;
+        }
+        if(flag) break;
+    }
+    if(flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
     #ifndef ONLINE_JUDGE
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\input.txt","r", stdin);
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\output.txt", "w", stdout);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

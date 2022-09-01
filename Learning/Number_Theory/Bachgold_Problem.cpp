@@ -123,9 +123,8 @@ bool isPrime(int n){
 
 
 void work(){
-    int n;
-    cin >> n;
-    cout << isPrime(n) << endl;
+    // 
+    
 }
 
 int main(){
@@ -136,7 +135,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    cin >> testcase;
+    // cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

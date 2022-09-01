@@ -94,7 +94,7 @@ void init(){
     fact[0] = 1;
     int i;
     for(i = 1;i < N;i++){
-        fact[i] = i * fact[i - 1];
+        fact[i] = (1ll * i * fact[i - 1])%p;
     }
     i--;
     invfact[i] = power(fact[i], p - 2, p);
@@ -123,9 +123,34 @@ bool isPrime(int n){
 
 
 void work(){
+    // My Answer
+    // int n;
+    // cin >> n;
+    // int ans = 0;
+    // string num = to_string(n);
+    // ans = 9 * (num.size() - 1);
+    // bool flag = true;
+    // for(int i = 1;i < num.size();i++){
+    //     if(num[i] < num[0]) {flag = false; break;}
+    //     else if(num[i] == num[0]) continue;
+    //     else break;
+    // }
+    // if(flag) ans += num[0] - '0';
+    // else ans += (num[0] - '0') - 1;
+    // cout << ans << endl;
+
+    // Tutorial Answer
     int n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    int res = 0;
+    for(int pw = 1;pw <= n;pw = pw * 10 + 1){
+        for(int d = 1;d <= 9;d++){
+            if(d * pw <= n){
+                res++;
+            }
+        }
+    }
+    cout << res << endl;
 }
 
 int main(){

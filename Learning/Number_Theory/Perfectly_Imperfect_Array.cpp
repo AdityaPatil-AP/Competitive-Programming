@@ -94,7 +94,7 @@ void init(){
     fact[0] = 1;
     int i;
     for(i = 1;i < N;i++){
-        fact[i] = i * fact[i - 1];
+        fact[i] = (1ll * i * fact[i - 1])%p;
     }
     i--;
     invfact[i] = power(fact[i], p - 2, p);
@@ -120,12 +120,26 @@ bool isPrime(int n){
     }
     return true;
 }
-
+#define MAX 10000
+ll sqt[MAX + 4];
+void sqtinit(){
+    for(int i = 1;i * i <= MAX;i++){
+        sqt[i * i] = 1;
+    }
+}
 
 void work(){
-    int n;
+    // My Answer
+    ll n;
     cin >> n;
-    cout << isPrime(n) << endl;
+    bool ok = 1;
+    for(int i = 0;i < n;i++){
+        int input;
+        cin >> input;
+        ok &= sqt[input];
+    }
+    (ok) ? cout << "NO" : cout << "YES";
+    cout << endl;
 }
 
 int main(){
@@ -135,6 +149,7 @@ int main(){
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    sqtinit();
     int testcase = 1;
     cin >> testcase;
     for(int i = 0;i < testcase;i++){
