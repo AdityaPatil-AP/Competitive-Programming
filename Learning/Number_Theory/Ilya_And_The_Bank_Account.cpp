@@ -121,25 +121,44 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
-    // 
+    // MY answer - accepted - String Implementation
+    // int n;
+    // cin >> n;
+    // if(n >= 10){
+    //     cout << n << endl;
+    // }
+    // else{
+    //     string ans = to_string(n);
+    //     if((ans[ans.size() - 1] - '0') >= (ans[ans.size() - 2] - '0')){
+    //         ans.erase(ans.end() - 1);
+    //     }
+    //     else{
+    //         ans.erase(ans.end() - 2);
+    //         if(ans[ans.size() - 1] == '0' && ans.size() == 2){
+    //             ans.erase(ans.begin());
+    //         }
+    //     }
+    //     cout << ans << endl;
+    // }
+
+    // Div and Mod Implementation
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
+    if(n > 0) cout << n << endl;
     else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+        int temp = n/10;
+        int k = temp % 10;
+        int a = n % 10;
+        if(k >= a){
+            n = n/10;
         }
-        cout << 3 << " " << endl;
+        else{
+            n = n/10 + a + abs(k);
+        }
+        cout << n << endl;
     }
+
 }
 
 int main(){

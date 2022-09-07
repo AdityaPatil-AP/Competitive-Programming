@@ -123,23 +123,27 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
-    int n;
+    // Solution Correct and according to the Editorial Answer
+    ll n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
+    ll maxElemOdd = 0, countOf2 = 0, oddSum = 0;
+    for(int i = 1;i <= n;i++){
+        int input;
+        cin >> input;
+        while(input % 2 == 0){
+            input = input/2;
+            countOf2++;
         }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+        if(maxElemOdd < input){
+            oddSum += maxElemOdd;
+            maxElemOdd = input;
         }
-        cout << 3 << " " << endl;
+        else{
+            oddSum += input;
+        }
     }
+    ll ans = oddSum + (maxElemOdd * (ll)pow(2, countOf2));
+    cout << ans << endl; 
 }
 
 int main(){
@@ -150,7 +154,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

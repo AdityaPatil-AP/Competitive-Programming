@@ -126,19 +126,16 @@ void work(){
     // 
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    string ans;
+    if(n == 1){
+        cout << "-1" << endl;
+        return;
     }
     else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+        for(int i = 1;i < n;i++){
+            ans += "3";
         }
-        cout << 3 << " " << endl;
+        cout << ("2" + ans) << endl;
     }
 }
 
@@ -150,7 +147,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

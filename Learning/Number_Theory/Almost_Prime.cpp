@@ -121,25 +121,26 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
     // 
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
+    vector<int> arr(n + 5, 0);
+    for(int i = 2;i <= n/2;i++){
+        if(arr[i] == 0){
+            arr[i] = 1;
+            for(int j = 2 * i;j <= n;j += i){
+                arr[j]++;
+            }
         }
-        cout << endl;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+    int count = 0;
+    for(int i = 1;i <= n;i++){
+        if(arr[i] == 2){
+            count++;
         }
-        cout << 3 << " " << endl;
     }
+    cout << count << endl;
 }
 
 int main(){

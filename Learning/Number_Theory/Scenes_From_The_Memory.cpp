@@ -3,6 +3,7 @@
 #include <climits>
 #include <cmath>
 #include <chrono>
+#include <string>
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
@@ -123,23 +124,47 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
+    // My Try : 
     int n;
+    string k;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
+    cin >> k;
+    bool isComposite = false;
+    for(int i = 0;i < k.size();i++){
+        if(!isPrime(k[i] - '0') || (k[i] - '0') == 1){
+            cout << 1 << endl;
+            cout << k[i] << endl;
+            isComposite = true;
+            break;
         }
-        cout << endl;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+    if(!isComposite){
+        bool found = false;
+        for(int i = 0;i < k.size() - 1;i++){
+            for(int j = i + 1;j < k.size();j++){
+                // string number;
+                // number += k[i];
+                // number += k[j];
+                // int num = stoi(number);
+                // if(!isPrime(num)){
+                //     cout << 2 << endl;
+                //     cout << num << endl;
+                //     found = true;
+                //     break;
+                // }
+                if(!isPrime((k[i] - '0') * 10 + (k[j] - '0'))){
+                    cout << 2 << endl;
+                    cout << k[i] << k[j] << endl;
+                    found = true;
+                    break;   
+                }
+            }
+            if(found == true) {
+                break;
+            }
         }
-        cout << 3 << " " << endl;
     }
+    return;
 }
 
 int main(){
@@ -150,7 +175,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

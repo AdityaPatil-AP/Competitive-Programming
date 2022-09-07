@@ -121,25 +121,24 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
     // 
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
+    vector<int> arr(n, 0);
+    for(int &x : arr) cin >> x;
+    sort(arr.begin(), arr.end(), [](int x, int y){
+        return x%2 < y%2;
+    });
+    // for(int i : arr) cout << i << " ";
+    // cout << endl;
+    int count = 0;
+    for(int i = 0;i < n;i++){
+        for(int j = i + 1;j < n;j++){
+            count += (__gcd(arr[i], arr[j] * 2) > 1);
         }
-        cout << endl;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    cout << count << endl;
 }
 
 int main(){
@@ -150,7 +149,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

@@ -121,25 +121,20 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
     // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    int x, y;
+    cin >> x >> y;
+    int a = min(x, y);
+    int b = max(x, y);
+    int ans = 0;
+    while(a){
+        ans += b/a;
+        int temp = b;
+        b = a;
+        a = temp%a;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    cout << ans << endl;
 }
 
 int main(){
@@ -150,7 +145,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

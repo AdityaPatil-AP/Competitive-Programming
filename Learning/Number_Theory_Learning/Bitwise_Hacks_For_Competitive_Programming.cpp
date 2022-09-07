@@ -121,25 +121,116 @@ bool isPrime(int n){
     return true;
 }
 
+unsigned int simpleMethodSetBits(unsigned int x){
+    int count = 0;
+    while(x){
+        count += x & 1;
+        x >>= 1;
+    }
+    return count;
+}
+
+unsigned int BrianKernighanSetBitsRecursive(unsigned int x){
+    if(x == 0) return 0;
+    return 1 + BrianKernighanSetBitsRecursive(x & (x - 1));
+}
+
+unsigned int BrianKernighanSetBits(unsigned int x){
+    int count = 0;
+    while(x){
+        count++;
+        x = x & (x - 1);
+    }
+    return count;
+}
+
+unsigned int checkPower2(unsigned int x){
+    return (x && !(x & (x - 1)));
+}
+
+unsigned int logbase2(int x){
+    int res = 0;
+    while(x){
+        res++;
+        x >>= 1;
+    }
+    return res;
+}
+
+unsigned int lastSetBit(unsigned int x){
+    return log2(x & -x) + 1;
+}
+
+int setBit(int num, int pos){
+    return (num | (1 << pos));
+}
+
+int unsetbit(int num, int pos){
+    return (~(1 << pos) & num);
+}
+
+int toggleBit(int num, int pos){
+    return num = num ^ (1 << pos);
+}
+
+bool checkSetUnset(int num, int pos){
+    bool bit = (1 << pos) & num;
+    return bit;
+}
+
+int onesComplement(int num){
+    return ~num;
+}
+
+int twosComplement(int num){
+    return ~num + 1;
+}
+
+void strip_last_bit(int &num){
+    num = num & (num - 1);
+    return;
+}
+
+int lowest_set_bit(int num){
+    int ans = num & (-num);
+    return ans;
+}
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    
+    // Bitwise Hacks For Competitive Programming.
+
+    // 1) Setting n'th bit.
+    int n = 4, pos = 1;
+    cout << setBit(4, 1) << endl;
+
+    // 2) How to clear a bit at n'th position.
+    n = 7, pos = 1;
+    cout << unsetbit(n, pos) << endl;
+
+    // 3) Toggling the bit - Use "Xor" Operator
+    n = 4, pos = 1;
+    cout << toggleBit(n, pos) << endl;
+
+    // 4) Checking it the bit at n'th position is set or unset
+    n = 5, pos = 1;
+    cout << checkSetUnset(n, pos) << endl; 
+
+    // 5) 1's Complement and 2's Complement.
+    int num = 4;
+    cout << onesComplement(num) << endl;
+    cout << twosComplement(num) << endl;
+
+    // 6) Stripping last bit.
+    num = 14;
+    strip_last_bit(num);
+    cout << num << endl;
+
+    // 7) Getting lowest bit
+    num = 24;
+    int ans = lowest_set_bit(num);
+    cout << ans << endl;
+
 }
 
 int main(){
@@ -156,5 +247,6 @@ int main(){
     }
     return 0;
 }
+
 
 

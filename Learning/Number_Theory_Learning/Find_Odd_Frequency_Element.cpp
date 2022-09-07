@@ -121,25 +121,53 @@ bool isPrime(int n){
     return true;
 }
 
+int findOddFreqElem(int *arr, int n){
+    int ans = 0;
+    for(int i = 0;i < n;i++){
+        ans ^= arr[i];
+    }
+    return ans;
+}
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    // Finding an odd frequency element in the bunch of some 
+    // even frequency elements can be done by simply finding the 
+    // xor of all the numbers.
+    // Find the odd occuring element.
+    int arr[] = {14, 14, 14, 14, 90, 90, 15, 15, 15};
+    int n = sizeof(arr)/ sizeof(arr[0]);
+    int ans = findOddFreqElem(arr, n);
+    cout << ans << endl;
+    
+    // Logical and Bitwise Operators are different.
+    // Logical operators return either 0 or 1.
+    // Whereas Bitwise operands return a integer value.
+    int x = 2, y = 5;
+    (x & y)? cout << "True " : cout << "False ";
+    (x && y)? cout << "True " : cout << "False";
+    cout << endl;
+
+    // left shift operator : Multiplication by 2
+    // right shift operator : Division by 2
+    x = 19;
+    cout << "x << 1 : " << (x << 1) << endl;
+    cout << "x >> 1 : " << (x >> 1) << endl;
+
+    // To check whether a number is odd or even we can use 
+    // (x & 1) -> 1 -> odd number
+    // (x & 1) -> 0 -> even number.
+    x = 19;
+    (x & 1) ? cout << "Odd Number" : cout << "Even Number";
+    cout << endl;
+
+    // The storage is different for ~ operator
+    // If stored in a signed variable we will get the answer as negative integer
+    // If stored in a unsigned variable then we get a huge answer.
+
+    signed int a = 1;
+    unsigned int b = 1;
+    cout << "Signed : " << ~a << endl;
+    cout << "Unsigned : " << ~b << endl;
 }
 
 int main(){

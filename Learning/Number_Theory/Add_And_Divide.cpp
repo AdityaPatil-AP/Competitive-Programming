@@ -3,6 +3,7 @@
 #include <climits>
 #include <cmath>
 #include <chrono>
+#include <string>
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
@@ -121,25 +122,49 @@ bool isPrime(int n){
     return true;
 }
 
+bool isSquare(int y){
+    int ans = sqrt(y);
+    return (ans * ans) == y;
+}
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    // My Try : Wrong Attempt
+    // int a, b;
+    // cin >> a >> b;
+    // int mini = INT_MAX;
+    // if(b > 1)
+    //     mini = log2(a)/log2(b) + 1;
+    // for(int i = b + 1;true;i++){
+    //     int difference = i - b;
+    //     int operations = difference + ((log2(a)/log2(i)) + 1); 
+    //     if(operations > mini){
+    //         break;
+    //     }
+    //     mini = min(operations, mini);
+    // }
+    // cout << mini << endl;
+
+    // Editorial
+    ll A, B, a, b, res, i, ans;
+    cin >> A >> B;
+    if(!A){
+        cout << 0 << endl;
+        return;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
+    res = A + 3;
+    for(i = (B < 2 ? 2 - B: 0);i < res;++i){
+        b = B + i;
+        a = A;
+        ans = i;
+        while(a){
+            a /= b;
+            ans++;
         }
-        cout << 3 << " " << endl;
+        if(ans < res) res = ans;
     }
+    cout << res << endl;
+    // Revisit..
+    
 }
 
 int main(){
@@ -150,7 +175,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

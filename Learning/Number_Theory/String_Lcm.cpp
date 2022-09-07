@@ -123,22 +123,27 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    // My Try :
+    // Didn't Understand the Question
+
+    // Editorial
+    string a, b;
+    cin >> a >> b;
+    int n = a.size();
+    int m = b.size();
+    int lcm = (n * m)/gcd(n, m);
+    string newa, newb;
+    for(int i = 0;i < (lcm/n);i++){
+        newa += a;
+    }
+    for(int i = 0;i < (lcm/m);i++){
+        newb += b;
+    }
+    if(newa == newb){
+        cout << newa << endl;
     }
     else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
+        cout << "-1" << endl;
     }
 }
 
@@ -150,7 +155,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

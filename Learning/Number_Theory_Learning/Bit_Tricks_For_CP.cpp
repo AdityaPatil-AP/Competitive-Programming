@@ -121,25 +121,127 @@ bool isPrime(int n){
     return true;
 }
 
+unsigned int simpleMethodSetBits(unsigned int x){
+    int count = 0;
+    while(x){
+        count += x & 1;
+        x >>= 1;
+    }
+    return count;
+}
+
+unsigned int BrianKernighanSetBitsRecursive(unsigned int x){
+    if(x == 0) return 0;
+    return 1 + BrianKernighanSetBitsRecursive(x & (x - 1));
+}
+
+unsigned int BrianKernighanSetBits(unsigned int x){
+    int count = 0;
+    while(x){
+        count++;
+        x = x & (x - 1);
+    }
+    return count;
+}
+
+unsigned int checkPower2(unsigned int x){
+    return (x && !(x & (x - 1)));
+}
+
+unsigned int logbase2(int x){
+    int res = 0;
+    while(x){
+        res++;
+        x >>= 1;
+    }
+    return res;
+}
+
+unsigned int lastSetBit(unsigned int x){
+    return log2(x & -x) + 1;
+}
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    
+    // Facts of this article
+    // 1. 0 - based indexing of bits from left to right
+    // 2. Setting i-th bit means turning i-th bit to 1
+    // 3. Clearing i-th bit means turning i-th bit to 0
+
+    // 1. Clearing all bits from LSB to i.
+    // This means that we have to make a mask where all bits from 
+    // LSB to i are 0 and remaining are 1.
+
+    // mask = ~((1 << (i + 1)) - 1)
+    // x &= mask;
+
+    int x = 29;
+    int i = 3;
+    int mask = (1 << (i + 1));
+    mask = mask - 1;
+    mask = ~mask;
+    x &= mask;
+    cout << x << endl;
+
+    // 2. Clearing all bits from MSB to i-th bit.
+    // here all the from MSB to i-th bit should be zero.
+    // mask = (1 << i) - 1;
+
+    x = 215;
+    i = 4;
+    mask = (1 << i) - 1;
+    x &= mask;
+    cout << x << endl;
+
+    // Divide by 2;
+    // x >>= 1;
+    x = 18;
+    x >>= 1;
+    cout << x << endl;
+
+    // Multiply by 2;
+    // x <<= 1;
+    x = 18;
+    x <<= 1;
+    cout << x << endl;
+
+    // 5. Upper Case to Lower Case
+    // A = 65 to a = 97;
+    // a - A = 32
+    // 32 ascii value is of ' ' character.
+    // The difference is the 5 bit of  'A' which should be set.
+    // For setting we have to mask it .with 0010 0000 which is 
+    // actually white space character (' ')
+    char ch = 'A';
+    ch |= ' ';
+    cout << ch << endl;
+
+    // 6. Lower Case to Upper Case
+    // to convert the lower case to upper case we have to convert
+    // the 5th bit of the lower case character to 0.
+    // So we have to AND 1101 1111 with the lower case character.
+    // mask = '_'; 1101 1111
+    ch = 'a';
+    ch &= '_';
+    cout << ch << endl;
+
+    // 7. Count the No. of set bits.
+    x = 255;
+    cout << simpleMethodSetBits(x) << endl;
+    cout << BrianKernighanSetBits(x) << endl;
+    cout << BrianKernighanSetBitsRecursive(x) << endl;
+
+    // 8. Find log base 2 of a 32-bit integer.
+    x = 255;
+    cout << logbase2(x) << endl;
+
+    // 9. Check if 32 - bit integer is a power of 2.
+    x = 33;
+    cout << checkPower2(x) << endl;
+
+    // 10. Find the last bit
+    x = 6;
+    cout << lastSetBit(x) << endl;
 }
 
 int main(){
@@ -156,5 +258,6 @@ int main(){
     }
     return 0;
 }
+
 
 

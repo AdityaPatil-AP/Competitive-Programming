@@ -3,6 +3,7 @@
 #include <climits>
 #include <cmath>
 #include <chrono>
+#include <string>
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
@@ -121,25 +122,17 @@ bool isPrime(int n){
     return true;
 }
 
+bool isSquare(int y){
+    int ans = sqrt(y);
+    return (ans * ans) == y;
+}
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    // My Try : 
+    ll k, x;
+    cin  >> k >> x;
+    ll ans = 9 * (k - 1) + x;
+    cout << ans << endl;
 }
 
 int main(){
@@ -150,7 +143,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

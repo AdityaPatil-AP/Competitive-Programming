@@ -121,25 +121,29 @@ bool isPrime(int n){
     return true;
 }
 
-
 void work(){
-    // 
+    // My wrong solution
+    // int n;
+    // cin >> n;
+    // vector<int> arr(n, 0);
+    // for(int i = 0;i < n;i++){
+    //     cin >> arr[i];
+    // }
+    // int maxi = *max_element(arr.begin(), arr.end());
+    // (maxi >= n) ? cout << "YES" : cout << "NO";
+    // cout << endl;
+
+    // Editor Solution 
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    int cnt = 0;
+    for(int i = 0;i < n;i++){
+        int input;
+        cin >> input;
+        if(input % 2 == 0) cnt++;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    if(cnt == n || cnt == 0) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main(){
@@ -150,7 +154,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

@@ -123,23 +123,66 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
-    int n;
+    // My Try :
+    // ll n;
+    // cin >> n;
+    // cout << n << endl;
+    // for(ll start = n;start <= n + 2520;start++){
+    //     set<ll> st;
+    //     ll temp = start;
+    //     while(temp){
+    //         ll k = temp % 10;
+    //         st.insert(k);
+    //         temp = temp/10;
+    //     }
+    //     bool flag = true;
+    //     // cout << temp << endl;
+    //     for(set<ll>::iterator it = st.begin();it != st.end();it++){
+    //         if(start%(*it) == 0){
+    //             continue;
+    //         }
+    //         else{ 
+    //             flag = false; 
+    //             break;
+    //         }
+    //     }
+    //     if(flag){ 
+    //         cout << start << endl; 
+    //         return;
+    //     }
+    //     st.clear();
+    // }
+    // return;
+    // ll n;
+    // cin>>n;
+    // while(1){
+    //     bool flag=1;
+    //     ll x=n;
+    //     while(x)
+    //         x%10?flag&=n%(x%10)==0:0,x/=10;
+    //     if(flag){
+    //         cout<<n<<endl;
+    //         break;
+    //     }
+    //     n++;
+    // }
+    // return;
+
+    // Implement this Again;
+    ll n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
+    while(1){
+        ll x = n;
+        bool flag = 1;
+        while(x)
+            (x % 10) ? flag &= ((n % (x % 10)) == 0) : 0,x /= 10;
+        if(flag){
+            cout << n << endl;
+            break;
         }
-        cout << endl;
+        n++;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    return;
 }
 
 int main(){
@@ -150,7 +193,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

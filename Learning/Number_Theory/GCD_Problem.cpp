@@ -123,23 +123,27 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
+    // Editorial Answer 1 - Constructive Method 
+    // int n;
+    // cin >> n;
+    // if(n % 2 == 0){
+    //     cout << n - 3 << " " << 2 << " " << 1 << endl;
+    // }
+    // else if(n % 4 == 1){
+    //     cout << n/2 - 1 << " " << n/2 + 1 << " " << 1 << endl;
+    // }
+    // else{
+    //     cout << n/2 - 2 << " " << n/2 + 2 << " " << 1 << endl;
+    // }
+
+    // Editorial Answer 2 - Brute Force
     int n;
     cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
-    }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
-    }
+    for(int a = 2; true;a++){
+        if(gcd(a, n - a - 1) != 1 || a == n - a - 1) continue;
+        cout << a << " " << n - a - 1 << " " << 1 << endl;
+        break;
+    } 
 }
 
 int main(){
@@ -150,7 +154,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }

@@ -123,22 +123,42 @@ bool isPrime(int n){
 
 
 void work(){
-    // 
-    int n;
-    cin >> n;
-    if(n % 2 == 0){
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2;i++){
-            cout << 2 << " ";
-        }
-        cout << endl;
+    // My answer - Wrong Solution
+    // int a, b, c, d;
+    // cin >> a >> b >> c >> d;
+    // int gcdf1 = gcd(a, b);
+    // int gcdf2 = gcd(c, d);
+    // a = a/gcdf1;
+    // b = b/gcdf1;
+    // c = c/gcdf2;
+    // d = d/gcdf2;
+    // if(a == 0 && c == 0){
+    //     cout << 0 << endl;
+    // }
+    // else if(a == 0 || c == 0){
+    //     cout << 1 << endl;
+    // }
+    // else{
+    //     if((a == c && b == d) || (1ll * a * d) == (1ll * b * c)){
+    //         cout << 0 << endl;
+    //     }
+    //     else if(a == c || a % c == 0 || c % a == 0) cout << 1 << endl;
+    //     else if(b == d || b % d == 0 || d % b == 0) cout << 1 << endl;
+    //     else cout << 2 << endl;
+    // }
+
+    // Editorial Answer
+    ll a, b, c, d;
+    cin >> a >> b >> c >> d;
+    ll x = a * d, y = b * c;
+    if(x == y){
+        cout << 0 << endl;
     }
-    else{
-        cout << n/2 << endl;
-        for(int i = 1;i <= n/2 - 1;i++){
-            cout << 2 << " ";
-        }
-        cout << 3 << " " << endl;
+    else if((x != 0 && y % x == 0) || (y != 0 && x % y == 0)){
+        cout << 1 << endl;
+    }
+    else {
+        cout << 2 << endl;
     }
 }
 
@@ -150,7 +170,7 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int testcase = 1;
-    // cin >> testcase;
+    cin >> testcase;
     for(int i = 0;i < testcase;i++){
         work();
     }
