@@ -132,6 +132,8 @@ void work(){
         ans = (1ll * ans + (n - k + 1 - i) * (i - 1))%mod;
     }
     cout << ans << endl;
+
+    // Ed
 }
 
 int main(){

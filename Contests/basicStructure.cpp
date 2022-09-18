@@ -2,41 +2,53 @@
 #include <algorithm>
 #include <climits>
 #include <cmath>
+#include <chrono>
+#include <string>
 #include <bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
 
-
-#define len(t) (int)t.size()
-#define forn(i, n) for(int i = 0;i < int(n);i++)
-
-using ll = long long int;
+#define mod 1000000007
 #define ll long long int
+#define PRIME 1000000007
+
+const int n = 100000005;
+#define pb push_back
+
+vector<int> primes;
+bool prime[n + 1];
+void SieveOfEratosthenes()
+{
+    memset(prime, true, sizeof(prime));
+ 
+    for (int p = 2; p * p <= n; p++) {
+        if (prime[p] == true) {
+            primes.pb(p);
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+}
 
 
-ll binpow(ll a, ll b, ll c){
-    if(b == 0) return 1;
-    ll t = (a, b/2, c);
-    if(b % 2) return (((t * t)%c * a) + c)%c;
-    return ((t * t)%c + c)%c;
+void work(){
+    // My Try :
+
 }
 
 int main(){
     #ifndef ONLINE_JUDGE
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\input.txt","r", stdin);
-    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Contests\\output.txt", "w", stdout);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\input.txt","r", stdin);
+    freopen("E:\\only one folder\\CompetitiveProgramming Github Repo\\Competitive-Programming\\Learning\\output.txt", "w", stdout);
     #endif
-
-    // int n = -1e6 +1;
-    // cout << n << endl;
-
-    // ll a = binpow(2, 200, 1e18);
-    // cout << (1LL << 63)   << endl;
-    int a = 'c' - '0';
-    cout << a << endl;
-    int x = 5;
-    vector<pair<int,int>> v1 = {{0, 0}, {0, x}, {x, 0}, {x, x}};
-    for(int i = 0;i <= 3;i++){
-        cout << v1[i].first <<  " "  << v1[i].second << endl;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int testcase = 1;
+    cin >> testcase;
+    for(int i = 0;i < testcase;i++){
+        work();
     }
     return 0;
 }
+
+
