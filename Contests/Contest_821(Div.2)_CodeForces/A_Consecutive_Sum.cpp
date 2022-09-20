@@ -14,26 +14,34 @@ using namespace std::chrono;
 
 const int n = 100000005;
 #define pb push_back
-
-vector<int> primes;
-bool prime[n + 1];
-void SieveOfEratosthenes()
-{
-    memset(prime, true, sizeof(prime));
- 
-    for (int p = 2; p * p <= n; p++) {
-        if (prime[p] == true) {
-            primes.pb(p);
-            for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
-        }
-    }
-}
-
+int k;
+// bool comp(int a, int b){
+//     if(a%k == b%k){
+//         return true;
+//     }
+//     return false;
+// }
 
 void work(){
     // My Try :
-
+    int n;
+    cin >> n >> k;
+    vector<ll> arr(n, 0);
+    for(auto &x : arr) cin >> x;
+    int temp = k;
+    for(int i = 0;i < k;i++){
+        for(int j = i + k;j < n;j += k){
+            if(arr[i] < arr[j] && temp > 0){
+                swap(arr[i], arr[j]);
+                temp--;
+            }
+        }
+    }
+    ll sum = 0;
+    for(int i = 0;i < k;i++){
+        sum += arr[i];
+    }
+    cout << sum << endl;
 }
 
 int main(){
