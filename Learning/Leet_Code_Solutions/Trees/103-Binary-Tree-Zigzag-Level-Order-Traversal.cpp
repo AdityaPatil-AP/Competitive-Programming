@@ -76,51 +76,84 @@ public:
 //     }
     
     // Review Using Two Stacks
-    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+//     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         
-        stack<TreeNode*> LtoR, RtoL;
-        int lvl = 1;
+//         stack<TreeNode*> LtoR, RtoL;
+//         int lvl = 1;
         
-        vector<vector<int>> ans;
+//         vector<vector<int>> ans;
         
-        if(!root) return ans;
+//         if(!root) return ans;
 
-        RtoL.push(root);
+//         RtoL.push(root);
 
-        while(!RtoL.empty() || !LtoR.empty()) {
+//         while(!RtoL.empty() || !LtoR.empty()) {
             
-            vector<int> v;
+//             vector<int> v;
             
-            if(lvl % 2 == 1) {
+//             if(lvl % 2 == 1) {
                                 
-                while(!RtoL.empty()) {
+//                 while(!RtoL.empty()) {
 
-                    TreeNode* curr = RtoL.top();
-                    RtoL.pop();
-                    v.push_back(curr -> val);
+//                     TreeNode* curr = RtoL.top();
+//                     RtoL.pop();
+//                     v.push_back(curr -> val);
 
-                    if(curr -> left) LtoR.push(curr -> left);
-                    if(curr -> right) LtoR.push(curr -> right);        
-                }   
+//                     if(curr -> left) LtoR.push(curr -> left);
+//                     if(curr -> right) LtoR.push(curr -> right);        
+//                 }   
 
-            } else {
+//             } else {
                 
-                while(!LtoR.empty()) {
+//                 while(!LtoR.empty()) {
 
-                    TreeNode *curr = LtoR.top();
-                    LtoR.pop();
-                    v.push_back(curr -> val);
+//                     TreeNode *curr = LtoR.top();
+//                     LtoR.pop();
+//                     v.push_back(curr -> val);
 
-                    if(curr -> right) RtoL.push(curr -> right);
-                    if(curr -> left) RtoL.push(curr -> left);                
-                } 
-            }
+//                     if(curr -> right) RtoL.push(curr -> right);
+//                     if(curr -> left) RtoL.push(curr -> left);                
+//                 } 
+//             }
             
-            ans.push_back(v);
-            lvl++;
+//             ans.push_back(v);
+//             lvl++;
             
-        }
+//         }
         
+//         return ans;
+//     }
+    
+    // My Code - Using two Stacks
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root){
+        stack<TreeNode*> LToR, RToL;
+        vector<vector<int>> ans;
+        if(!root) return ans;
+        RToL.push(root);
+        int level = 0;
+        while(!LToR.empty() || !RToL.empty()){
+            vector<int> v;
+            if(level % 2 == 0){
+                while(!RToL.empty()){
+                    TreeNode* current = RToL.top();
+                    v.push_back(current->val);
+                    RToL.pop();
+                    if(current->left) LToR.push(current->left);
+                    if(current->right) LToR.push(current->right);
+                }
+            }
+            else{
+                while(!LToR.empty()){
+                    TreeNode* current = LToR.top();
+                    v.push_back(current->val);
+                    LToR.pop();
+                    if(current->right) RToL.push(current->right);
+                    if(current->left) RToL.push(current->left);
+                }
+            }
+            ans.push_back(v);
+            level++;
+        }
         return ans;
     }
 };
