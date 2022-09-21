@@ -11,50 +11,83 @@
  */
 class Solution {
 public:
-    // Tip : Whenever you are solving any question were you have to remember the next levels of the current node
-    // use a queue generically. It may be tree question or a graph question.
+    // Here I have analysed five ways of doing this question.
+    // Only some functions or technique would vary. Crux is the BFS and in one 
+    // approach we use BFS.
     
-    vector<vector<int>> levelOrder(TreeNode* root) {
-        // The Levels of a Binary Tree stored in the 2d - vector
-        vector<vector<int>> arr;
-        // If root is null return the empty vector
-        if(root == NULL) return arr;
-        // For storing the TreeNodes we are declaring a queue of TreeNode pointers
-        queue<TreeNode*> q;
-        // We push the root at first.
-        q.push(root);
-        // q.push(NULL);
-        // Storing the contents of the current level in the level vector.
-        vector<int> level;
-        // While the queue is not empty we have a level remaining so we enter the while loop.
-        while(!q.empty()){
-            // if(current == NULL){
-            //     arr.push_back(level);
-            //     level.clear();
-            //     q.pop();
-            //     if(q.empty()){
-            //         break;
-            //     }
-            //     q.push(NULL);
-            //     continue;
-            // }
-            // Using this approach at any instant we only have a specific level in the Binary Tree.
-            // We just check the no. of elements in the queue and we push the node values in the level vector 
-            // as well we start filling the next level in the queue but as the for loop is iterating for just the 
-            // n - elements we don't pop the next level elements or add them into the level vector.
-            int n = q.size();
-            for(int i = 0;i < n;i++){
-                TreeNode* current = q.front();
-                level.push_back(current->val);
-                if(current->left != NULL) q.push(current->left);
-                if(current->right != NULL) q.push(current->right);
-                q.pop();
-            }
-            // We push the current level into the 2-d vector.
-            arr.push_back(level);
-            level.clear();
-        }
-        // We return the 2-d vector answer.
-        return arr;
-    }
+    // 1) Using queue and reverse function.
+    // vector<vector<int>> levelOrderBottom(TreeNode* root) {
+    //     // 2-d Vector for storing the answer
+    //     vector<vector<int>> arr;
+    //     // if root is null return empty arr
+    //     if(root == NULL) return arr;
+    //     // For Storing the children
+    //     queue<TreeNode*> q;
+    //     // pushing the first level.
+    //     q.push(root);
+    //     // For storing the individual level.
+    //     vector<int> level;
+    //     // Until the queue is not empty go in the loop as there is some node which have to 
+    //     // be processed.
+    //     while(!q.empty()){
+    //         // Only the current level has to be considered for this time so we take the size of the 
+    //         // queue already..
+    //         int n = q.size();
+    //         for(int i = 0;i < n;i++){
+    //             // Take the current node push into the level and then pushing the children into the 
+    //             // queue. Popping the current node as well.
+    //             TreeNode* current = q.front();
+    //             level.push_back(current->val);
+    //             if(current->left) q.push(current->left);
+    //             if(current->right) q.push(current->right);
+    //             q.pop();
+    //         }
+    //         // At the last add that level in to the 2-d vector.
+    //         arr.push_back(level);
+    //         level.clear();
+    //     }
+    //     // Reversing the levels from bottom to up fashion now.
+    //     reverse(arr.begin(), arr.end());
+    //     return arr;
+    // }
+    
+    // 2) Using Queue and insert function for 2-d Vector(adding current level at the start). - Very Slow
+    // vector<vector<int>> levelOrderBottom(TreeNode* root) {
+    //     // 2-d Vector for storing the answer
+    //     vector<vector<int>> arr;
+    //     // if root is null return empty arr
+    //     if(root == NULL) return arr;
+    //     // For Storing the children
+    //     queue<TreeNode*> q;
+    //     // pushing the first level.
+    //     q.push(root);
+    //     // For storing the individual level.
+    //     vector<int> level;
+    //     // Until the queue is not empty go in the loop as there is some node which have to 
+    //     // be processed.
+    //     while(!q.empty()){
+    //         // Only the current level has to be considered for this time so we take the size of the 
+    //         // queue already..
+    //         int n = q.size();
+    //         for(int i = 0;i < n;i++){
+    //             // Take the current node push into the level and then pushing the children into the 
+    //             // queue. Popping the current node as well.
+    //             TreeNode* current = q.front();
+    //             level.push_back(current->val);
+    //             if(current->left) q.push(current->left);
+    //             if(current->right) q.push(current->right);
+    //             q.pop();
+    //         }
+    //         // At the front add that current level in to the 2-d vector.
+    //         arr.insert(arr.begin(), level);
+    //         level.clear();
+    //     }
+    //     // Ultimately due to our unique of inserting the current levels at the first 
+    //     // We already have the levels stored in the reverse order.
+    //     return arr;
+    // }
+    
+    // 3) Using Recursive Approach
+    
+
 };
