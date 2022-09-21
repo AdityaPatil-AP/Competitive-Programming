@@ -17,6 +17,7 @@ const int N = 10000005;
 
 const int maxN = 1000001;
 ll arr[maxN] = {0};
+// Pre - Computation is Done is O(sqrt(n))
 void sieve(){
     // Initialise all the elements as -1, indicating they are unmarked till now
     for(int i = 1;i <= maxN;i++) arr[i] = -1;
@@ -24,7 +25,7 @@ void sieve(){
     // Replace them with the index value, and also all the multiples of it with the same/
     // the same index value.
 
-    for(ll i = 2;i <= maxN;i++){
+    for(ll i = 2;i * i <= maxN;i++){
         if(arr[i] == -1){
             arr[i] = i;
             for(ll j = i * i;j <= maxN;j += i){
@@ -39,14 +40,17 @@ void sieve(){
 void primeFact(int n){
     cout << "Prime Factorisation of " << n << " is " << endl;
     while(n > 1){
-        cout << arr[n] << " ";
+        if(arr[n] == -1){
+            cout << n << endl;
+        }
+        else cout << arr[n] << " ";
         n /= arr[n]; 
     }
     return;
 }
 
 void work(){
-    // Prime Factorisation Using Sieve : 
+    // Prime Factorisation Using Sieve in log(n): 
     primeFact(48);
     cout << endl;
 }
