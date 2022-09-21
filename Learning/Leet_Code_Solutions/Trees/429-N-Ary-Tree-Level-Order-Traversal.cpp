@@ -44,24 +44,48 @@ public:
     // }
     
     // 2) Recursive DFS
-    void helper(Node* root, int level){
-        if(!root) return;
-        if(level >= res.size()){
-            res.push_back({});
-        }
-        res[level].push_back(root->val);
-        for(Node* child : root->children){
-            if(child) helper(child, level + 1);
-        }
-    }
+//     void helper(Node* root, int level){
+//         if(!root) return;
+//         if(level >= res.size()){
+//             res.push_back({});
+//         }
+//         res[level].push_back(root->val);
+//         for(Node* child : root->children){
+//             if(child) helper(child, level + 1);
+//         }
+//     }
     
+//     vector<vector<int>> levelOrder(Node* root){
+//         if(!root) return res;
+//         helper(root, 0);
+//         return res;
+//     }
+    
+//     private:
+//     vector<vector<int>> res;
+//     int depth;
+    
+    // 3) Iterative BFS
     vector<vector<int>> levelOrder(Node* root){
-        if(!root) return res;
-        helper(root, 0);
-        return res;
+        if(!root) return {};
+        stack<pair<Node*, int>> st;
+        vector<vector<int>> ans;
+        st.push({root, 0});
+        while(!st.empty()){
+            const auto [node, level] = st.top(); 
+            st.pop();
+            if(level >= ans.size()){
+                ans.push_back({node->val});   
+            }
+            else{
+                ans[level].push_back(node->val);
+            }
+            // We need to push them in reverse order because the node which goes first 
+            // comes out last.
+            for(auto it = crbegin(node->children); it != crend(node->children);it++){
+                st.push({*it, level + 1});
+            }
+        }
+        return ans;
     }
-    
-    private:
-    vector<vector<int>> res;
-    int depth;
 };
