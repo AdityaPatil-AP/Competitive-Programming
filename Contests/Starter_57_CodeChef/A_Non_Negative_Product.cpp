@@ -12,41 +12,31 @@ using namespace std::chrono;
 #define ll long long int
 #define PRIME 1000000007
 
-const int n = 100000005;
+// const int n = 100000005;
 #define pb push_back
 
-vector<int> arr;
-
 void work(){
-    // Maximum Colors
-    arr.resize(3);
+    // My Try :
+    int n;
+    cin>>n;
+    vector<int> arr(n, 0);
     for(auto &x : arr) cin >> x;
     // for(auto x : arr) cout << x << " ";
     // cout << endl;
-    sort(arr.rbegin(), arr.rend());
-    int ans = 0;
-    for(int i = 0;i < 3;i++){
-        if(arr[i] > 0){
-            ans += 1;
-            arr[i] -= 1;
+    bool isZeroPresent = false;
+    int countNegative = 0;
+    for(int i = 0;i < n;i++){
+        if(arr[i] < 0){
+            countNegative++;
+        }
+        if(arr[i] == 0){
+            isZeroPresent = true;
         }
     }
-    // for(auto x : arr) cout << x << " ";
-    // cout << endl;
-    for(int i = 0;i < 2;i++){
-        if(arr[i] > 0){
-            for(int j = i + 1;j < 3;j++){
-                // cout << arr[i] << " " << arr[j] << endl;
-                if(arr[i] >= 1 && arr[j] >= 1){
-                    ans += 1;
-                    arr[i] -= 1;
-                    arr[j] -= 1;
-                }
-            }
-        }
+    if(isZeroPresent || countNegative % 2 == 0 || countNegative == 0){
+        cout << 0 << endl;
     }
-    cout << ans << endl;
-    // arr.clear();
+    else cout << 1 << endl;
 }
 
 int main(){

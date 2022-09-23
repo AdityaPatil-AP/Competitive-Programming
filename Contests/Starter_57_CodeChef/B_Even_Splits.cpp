@@ -12,41 +12,43 @@ using namespace std::chrono;
 #define ll long long int
 #define PRIME 1000000007
 
-const int n = 100000005;
+// const int n = 100000005;
 #define pb push_back
 
-vector<int> arr;
-
 void work(){
-    // Maximum Colors
-    arr.resize(3);
-    for(auto &x : arr) cin >> x;
-    // for(auto x : arr) cout << x << " ";
-    // cout << endl;
-    sort(arr.rbegin(), arr.rend());
-    int ans = 0;
-    for(int i = 0;i < 3;i++){
-        if(arr[i] > 0){
-            ans += 1;
-            arr[i] -= 1;
+    // My Try :
+    int n;
+    cin>>n;
+    string s;
+    cin >> s;
+    // counting the number of ones
+    int countOne = 0;
+    // checking if 0 is ahead.
+    bool isZeroAhead = false;
+    for(int i = 0;i < n;i++){
+        if(s[i] == '1'){ 
+            countOne++;
+        }
+        if(i < n - 1 && (s[i] == '0' && s[i + 1] == '1')){
+            isZeroAhead = true;
         }
     }
-    // for(auto x : arr) cout << x << " ";
-    // cout << endl;
-    for(int i = 0;i < 2;i++){
-        if(arr[i] > 0){
-            for(int j = i + 1;j < 3;j++){
-                // cout << arr[i] << " " << arr[j] << endl;
-                if(arr[i] >= 1 && arr[j] >= 1){
-                    ans += 1;
-                    arr[i] -= 1;
-                    arr[j] -= 1;
-                }
-            }
-        }
+    if(!isZeroAhead){
+        cout << s << endl;
+        return;
     }
-    cout << ans << endl;
-    // arr.clear();
+    else{
+        string a = "";
+        int i;
+        for(i = 0;i < n - countOne;i++){
+            a += "0";
+        }
+        for(i = 0;i < countOne;i++){
+            a += "1";
+        }
+        cout << a << endl;
+        return;
+    }
 }
 
 int main(){
