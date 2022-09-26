@@ -195,15 +195,16 @@ int totalNodes(node* root){
 }
 
 node* deleteBST(node* root){
-    if(!root){
+    node* temp = root;
+    if(root){
         // Empty the left Subtree
         deleteBST(root->left);
         // Empty the right subtree
         deleteBST(root->right);
 
-        node* temp = root;
-        cout << "\nReleased Node is : " << temp->key << " ";
-        free(root);
+        cout << "\nReleased Node is : " << root->key << " ";
+        temp = root;
+        free(temp);
     }
     return root;
 }
@@ -258,16 +259,16 @@ int main(){
 
     cout << "Height of BST : " << height(root) << endl;
 
-    cout << "Enter a Node to be deleted : " << endl;
-    int key;
-    cin >> key;
-    cout << "Inorder before : ";
-    inorder(root);
-    cout << endl;
-    deleteNode(root, key);
-    cout << "Inorder after : ";
-    inorder(root);
-    cout << endl;
+    // cout << "Enter a Node to be deleted : " << endl;
+    // int key;
+    // cin >> key;
+    // cout << "Inorder before : ";
+    // inorder(root);
+    // cout << endl;
+    // deleteNode(root, key);
+    // cout << "Inorder after : ";
+    // inorder(root);
+    // cout << endl;
 
     cout << "Smallest Value of the BST : " << endl;
     cout << minValueNode(root)->key << endl;
