@@ -97,22 +97,37 @@ public:
         return res;
     }
     
-    vector<vector<int>> twoSum(vector<int> &nums, long long target, int start){
+//     vector<vector<int>> twoSum(vector<int> &nums, long long target, int start){
+//         vector<vector<int>> res;
+//         int low = start, high = int(nums.size()) - 1;
+//         while(low < high){
+//             int sum = nums[low] + nums[high];
+//             if(sum < target || (low > start && nums[low] == nums[low - 1])){
+//                 low++;
+//             }
+//             else if(sum > target || (high < nums.size() - 1 && nums[high] == nums[high + 1])){
+//                 high--;
+//             }
+//             else{
+//                 res.push_back({nums[low], nums[high]});
+//                 high--;
+//                 low++;
+//             }
+//         }
+//         return res;
+//     }
+    
+    // Using Hash Set Implementation
+    vector<vector<int>> twoSum(vector<int>&nums, long long target, int start){
+        unordered_set<long long> s;
         vector<vector<int>> res;
-        int low = start, high = int(nums.size()) - 1;
-        while(low < high){
-            int sum = nums[low] + nums[high];
-            if(sum < target || (low > start && nums[low] == nums[low - 1])){
-                low++;
+        for(int i = start; i < nums.size();i++){
+            if(res.empty() || res.back()[1] != nums[i]){
+                if(s.count(target - nums[i])){
+                    res.push_back({int(target - nums[i]), nums[i]});
+                }
             }
-            else if(sum > target || (high < nums.size() - 1 && nums[high] == nums[high + 1])){
-                high--;
-            }
-            else{
-                res.push_back({nums[low], nums[high]});
-                high--;
-                low++;
-            }
+            s.insert(nums[i]);
         }
         return res;
     }
