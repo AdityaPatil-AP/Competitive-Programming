@@ -15,54 +15,51 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
+// kadane's algorithm - A subarray can be empty as well
+// It's size is always zero.
+// Lower bound is 0 and answer is always greater than that.
+// Use functions when answer is becoming repititive. 
+// Using insert and erase to add or delete elements at the beginning 
+// or end of the array.
+// Do binary String wale questions ..
+// Permutations wale questions.
+ll maximumSumSubarray(vector<ll> &arr){
+    int n = arr.size();
+    ll tot_sum = INT_MIN, sum = 0;
+    for(int i = 0;i < n;i++){
+        sum += arr[i];
+        if(sum > tot_sum) 
+            tot_sum = sum;
+        if(sum < 0)
+            sum = 0;
+    }
+    return tot_sum;
+}
+
 void work(){
     // My Try :
     // Maximum Subarray
     int n;
     cin >> n;
-    vector<int> arr1(n + 2, 0);
-    for(int i = 1; i <= n;i++) cin >> arr1[i];
+    vector<ll> arr1(n, 0);
+    for(auto &x : arr1) cin >> x;
     int m;
     cin >> m;
-    vector<int> arr2(m, 0);
-    for(int i = 0;i < m;i++) cin >> arr2[i];
+    vector<ll> arr2(m, 0);
+    for(auto &x : arr2) cin >> x;
     int sum = 0;
     // Traverse in the second array and find the positive integers
-    int maxElement = INT_MIN;
     for(int i = 0;i < m;i++){
-        maxElement = max(arr2[i], maxElement);
         if(arr2[i] > 0){
             sum += arr2[i];
         }
     }
-    // Putting all the positive elements at the start.
-    arr1[0] = sum;
-    int i = 0;
-    int maxsum = INT_MIN;
-    int sumn = 0;
-    while(i < n + 1){
-        sumn += arr1[i];
-        if(sumn > maxsum){
-            maxsum = sumn;
-        }
-        if(sumn < 0)
-            sumn = 0;
-        i++;
-    }
-    arr1[0] = 0;
-    arr1[n + 1] = sum;
-    sumn = 0;
-    i = 0;
-    while(i < n + 2){
-        sumn += arr1[i];
-        if(sumn > maxsum){
-            maxsum = sumn;
-        }
-        if(sumn < 0)
-            sumn = 0;
-        i++;
-    }
-    cout << max(maxElement, maxsum) << endl;
+    arr1.insert(arr1.begin(), sum);
+    ll maxx = maximumSumSubarray(arr1);
+    arr1.erase(arr1.begin(), arr1.begin() + 1);
+    arr1.insert(arr1.begin() + n, sum);
+    maxx = max(maxx, maximumSumSubarray(arr1));
+    cout << maxx << endl;
     return;
 }
 
