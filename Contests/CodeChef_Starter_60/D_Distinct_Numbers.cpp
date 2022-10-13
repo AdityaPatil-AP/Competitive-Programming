@@ -18,24 +18,24 @@ const int n = 100000005;
 void work(){
     // My Try :
     // Distinct Numbers
-    long long int n, k;
+    int n, k;
     cin >> n >> k;
-    set<long long int> st;
-    vector<long long int> arr(n, 0);
-    for(long long int &x : arr) cin >> x;
-    long long int maxi = INT_MIN;
-    for(long long int i = 0;i < n;i++){
+    set<int> st;
+    vector<int> arr(n, 0);
+    for(int &x : arr) cin >> x;
+    int maxi = INT_MIN;
+    for(int i = 0;i < n;i++){
         maxi = max(arr[i], maxi);
         st.insert(arr[i]);
     }
 
 
-    set<long long int> st1 = st;
+    set<int> st1 = st;
     // Choosing the max and then all the minimum;
-    long long int ans1 = 0;
-    long long int size = st.size();
-    long long int max1 = maxi;
-    for(long long int i = 2 * size;i >= 1;i--){
+    ll ans1 = 0;
+    int size = st.size();
+    int max1 = maxi;
+    for(int i = 2 * size;i >= 1;i--){
         if(st.find(i) == st.end()){
             st.insert(i);
             max1 = i;
@@ -43,10 +43,10 @@ void work(){
         }
     }
     size++;
-    ll maxm = max(maxi, max1);
+    int maxm = max(maxi, max1);
     ans1 += (maxm - max1);
-    ll op = k - 1;
-    for(ll i = 1;i <= 2 * size, op > 0;i++){
+    int op = k - 1;
+    for(int i = 1;i <= 2 * size, op > 0;i++){
         if(st.find(i) == st.end()){
             maxm = max(maxm, i);
             // cout << i << " " << maxm << endl;
@@ -59,7 +59,7 @@ void work(){
     ll ans2 = 0;
     op = k;
     size = st1.size();
-    for(ll i = 1;i <= 2* size++,op > 0;i++){
+    for(int i = 1;i <= 2* size++,op > 0;i++){
         
         if(st1.find(i) == st1.end()){
             maxi = max(maxi, i);
