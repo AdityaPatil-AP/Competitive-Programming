@@ -17,7 +17,7 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // c)
+    // c) Final Sum
     int n, q;
     cin >> n >> q;
     ll sum = 0;
@@ -35,6 +35,11 @@ void work(){
         else sum += 1;
     }
     cout << sum << endl;
+
+    // Editorial.
+
+    // Same Ideology.
+    // Time Complexity : O(N + Q).
     return;
 }
 

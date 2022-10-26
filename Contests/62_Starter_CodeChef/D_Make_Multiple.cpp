@@ -17,7 +17,8 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // c)
+    // D) Make Multiple
+    // Editorial
     ll a, b;
     cin >> a >> b;
     ll difference = (b - a);
