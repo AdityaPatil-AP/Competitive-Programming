@@ -17,11 +17,14 @@ int main(){
     // for(auto str : ans){
     //     cout << str << endl;
     // }
-    vector<int> arr = {1, 6, 4, 5, 3, 2};
-    sort(arr.begin(), arr.end(), comp);
-    for(int i : arr){
-        cout << i << " ";
-    }
+    // vector<int> arr = {1, 6, 4, 5, 3, 2};
+    // sort(arr.begin(), arr.end(), comp);
+    // for(int i : arr){
+    //     cout << i << " ";
+    // }
+    int a = '1';
+    int b = '1';
+    cout << a + b << endl;
     cout << endl;
     return 0;
 }

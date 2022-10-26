@@ -17,7 +17,24 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // A) Chef Score
+    // int n, x, y;
+    // cin >> n >> x >> y;
+    // if(y % x == 0 && (y/x) <= n){
+    //     cout << "YES" << endl;
+    // }
+    // else cout << "NO" << endl;
+    // return;
+
+    // Editorial
+    // In the input 0 <= y <= n.x;
+    // Which signifies that the number of questions are sufficent to 
+    // to get y marks.
+    ll n, x, y;
+    cin >> n >> x >> y;
+    if(y % x == 0) cout << "YES" << endl;
+    else cout << "NO" << endl;
+    return;
 }
 
 int main(){

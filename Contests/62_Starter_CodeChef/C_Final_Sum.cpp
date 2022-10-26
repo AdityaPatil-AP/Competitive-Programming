@@ -17,7 +17,25 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // c)
+    int n, q;
+    cin >> n >> q;
+    ll sum = 0;
+    for(int i = 0;i < n;i++){
+        int num;
+        cin >> num;
+        sum += num;
+    }
+    while(q--){
+        int start, end;
+        cin >> start >> end;
+        if((end - start + 1) % 2 == 0){
+            continue;
+        }
+        else sum += 1;
+    }
+    cout << sum << endl;
+    return;
 }
 
 int main(){

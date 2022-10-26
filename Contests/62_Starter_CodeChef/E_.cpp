@@ -17,7 +17,24 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // E)
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    ll ans = 0;
+    int i = 0;
+    while(i < n){
+    	while(i < n && s[i] == '0'){
+    		i++;
+    	}
+    	if(i + 1 < n && s[i] == '1' && s[i + 1] == '0'){
+    		ans++;
+    	}
+    	i++;
+    }
+    cout << ans << endl;
+    return;
 }
 
 int main(){

@@ -17,7 +17,16 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // c)
+    ll a, b;
+    cin >> a >> b;
+    ll difference = (b - a);
+    // int g = (difference - a);
+    if(a <= difference || a == b){
+        cout << "YES" << endl;
+    }
+    else cout << "NO" << endl;
+    return;
 }
 
 int main(){

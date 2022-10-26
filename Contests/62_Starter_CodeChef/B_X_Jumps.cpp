@@ -17,7 +17,17 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // B) X Jumps
+    // int x, y;
+    // cin >> x >> y;
+    // cout << (x/y) + (x%y) << endl;
+
+    // Editorial
+    // B) X Jumps
+    ll x, y;
+    cin >> x >> y;
+    cout << (x/y) + (x%y) << endl;
+    return;
 }
 
 int main(){
