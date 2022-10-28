@@ -40,9 +40,10 @@ void work(){
          cout << 0 << endl;
          return;
      }
-    int size = min(n - j, n - i);
+    // int size = min(n - j, n - i);
+    // int size = min(n - j, n - i);
     int i1 = i;
-    // number of consecutive ones at the start
+    // number of consecutive Zeroes at the start
     while(i1 < n && s[i1] == '0'){
         i1++;
     }
@@ -50,28 +51,34 @@ void work(){
     int numZeroesC = i1 - i;
     int numCOnes = 0;
     int j1 = j;
-    while((n - j1 - 1) >= size && s[j1] == '1'){
+    while(j1 < n && s[j1] == '1'){
         j1++;
     }
     numCOnes = j1 - j;
-    j += max(0, (numCOnes - numZeroesC));
-    string a, b;
+    i += max(0, (numZeroesC - numCOnes));
+    string a = "", b = "";
+    int size = min(n - i, n - j);
+    // cout << i << " " << j << endl;
+    // cout << i << " " << j << endl;
     for(;j < n && i < n;i++, j++){
         a += s[i];
         b += s[j];
     }
-    string c;
+    // cout << a << "  " << b << endl;
+    string c = "";
     for(int i = 0;i < size;i++){
         int num = a[i] + b[i];
         if(num == 97){
-            c[i] = '1';
+            c += '1';
         }
-        else c[i] = '0';
+        else c += '0';
     }
+    // cout << c << endl;
     ll ans = 0;
     for(int i = size - 1;i >= 0;i--){
-        if(c[i] == '1')
-            ans = (ans + (ll)(pow(2, (size - i - 1)))%mod)%mod;
+        if(c[i] == '1'){
+            ans = (ans + (ll)(pow(2, (size - i - 1))))%mod;
+        }
     }
     cout << ans << endl;
     return;

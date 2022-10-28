@@ -17,23 +17,40 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // E)
-    int n;
+    // E) Sorted Substrings
+    // int n;
+    // cin >> n;
+    // string s;
+    // cin >> s;
+    // ll ans = 0;
+    // int i = 0;
+    // while(i < n){
+    // 	while(i < n && s[i] == '0'){
+    // 		i++;
+    // 	}
+    // 	if(i + 1 < n && s[i] == '1' && s[i + 1] == '0'){
+    // 		ans++;
+    // 	}
+    // 	i++;
+    // }
+    // cout << ans << endl;
+
+    // Editorial
+    // convert the binary string into Alternating String First.
+    // Delete either the 0's or the 1's and the remaining size of the string is 
+    // the answer.
+    // or Simple way is to count the number of "10" in the string.
+    ll n;
     cin >> n;
     string s;
     cin >> s;
-    ll ans = 0;
-    int i = 0;
-    while(i < n){
-    	while(i < n && s[i] == '0'){
-    		i++;
-    	}
-    	if(i + 1 < n && s[i] == '1' && s[i + 1] == '0'){
-    		ans++;
-    	}
-    	i++;
+    ll pos = 0;
+    ll cnt = 0;
+    while((pos = s.find("10", pos)) != std::string::npos){
+        cnt++;
+        pos += 2;
     }
-    cout << ans << endl;
+    cout << cnt << endl;
     return;
 }
 
