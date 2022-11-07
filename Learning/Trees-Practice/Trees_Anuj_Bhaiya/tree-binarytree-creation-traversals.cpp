@@ -33,11 +33,19 @@ Node<T> *createTree()
     return root;
 }
 
+template <typename T>
+void printTree(Node<T> *root)
+{
+}
+
 int main()
 {
     // Creation of a Tree.
     Node<int> *root = createTree<int>();
 
     // Printing a Tree.
+    // Traversals.
+
+    printTree<int>(root);
     return 0;
 }
