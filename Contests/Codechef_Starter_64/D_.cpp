@@ -18,9 +18,11 @@ const int n = 100000005;
 void work()
 {
     // My Try :
-    // 
+    // finding prime factors in log(n).
+    ll a, b;
+    cin >> a >> b;
     
-
+    
 }
 
 int main()
