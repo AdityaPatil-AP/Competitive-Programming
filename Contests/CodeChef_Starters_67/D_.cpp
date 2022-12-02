@@ -15,20 +15,24 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
+bool comp(pair<ll, ll> a1, pair<ll, ll> a2){
+    return (a1.first * a2.second) > (a1.second * a2.first);
+}
+
 void work()
 {
     // My Try :
     // Musical Rods.
-    ll n;
-    cin >> n;
-    vector<ll> lengths(n, 0);
-    for(auto &x : lengths) cin >> x;
-    vector<ll> beauty(n, 0);
-    for(auto &x : beauty) cin >> x;
-    // Recursion.
-    // We have to recursion perfectly.
-    // curr_pos, 
-    ll ans = solve(0, )
+    // ll n;
+    // cin >> n;
+    // vector<ll> lengths(n, 0);
+    // for(auto &x : lengths) cin >> x;
+    // vector<ll> beauty(n, 0);
+    // for(auto &x : beauty) cin >> x;
+    // // Recursion.
+    // // We have to recursion perfectly.
+    // // curr_pos, 
+    // ll ans = solve(0, )
 
     // Greedy.
     // ll sum  = 0;
@@ -58,6 +62,29 @@ void work()
     //     full--;
     // }
     // cout << ans << endl;
+
+
+    // Editorial - Musical Rods.
+    // Sorting and Exchange Arguments.
+    ll n;
+    cin >> n;
+    vector<ll> lengths(n, 0);
+    for(auto &x : lengths) cin >> x;
+    vector<ll> beauty(n, 0);
+    for(auto &x : beauty) cin >> x;
+    // Sort them by descending order of lengths/beauty.
+    vector<pair<ll, ll>> rods(n, {0, 0});
+    for(int i = 0;i < n;i++){
+        rods[i].first = lengths[i];
+        rods[i].second = beauty[i];
+    }
+    sort(rods.begin(), rods.end(), comp);
+    ll ans = 0, curr = 0;
+    for(int i = 0;i < n;i++){
+        ans += (rods[i].second * curr);
+        curr += (rods[i].first);
+    }
+    cout << ans << endl;
     return;
 }
 
