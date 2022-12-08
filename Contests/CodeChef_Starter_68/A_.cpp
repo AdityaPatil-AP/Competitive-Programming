@@ -19,6 +19,9 @@ void work()
 {
     // My Try :
     // 
+    ll n, x;
+    cin  >> n >> x;
+    cout << pow(2, x - n) << endl;
     return;
 }
 

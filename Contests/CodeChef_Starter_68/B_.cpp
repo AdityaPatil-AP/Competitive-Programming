@@ -18,7 +18,22 @@ const int n = 100000005;
 void work()
 {
     // My Try :
-    // 
+    // make money
+    ll n, x, c;
+    cin >> n >> x >> c;
+    vector<ll> arr(n, 0);
+    for(auto &x1 : arr) cin >> x1;
+    ll ans = 0;
+    int count = 0;
+    for(int i = 0;i < n;i++){
+        // ll diff = x - arr[i];
+        if((x - c) >= arr[i]){
+            count++;
+            ans += x;
+        }
+        else ans += arr[i];
+    }
+    cout << ans - (c * count) << endl;
     return;
 }
 
