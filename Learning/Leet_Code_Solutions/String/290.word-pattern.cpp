@@ -1,34 +1,34 @@
-class Solution {
+class Solution
+{
 public:
-    bool wordPattern(string pattern, string s) {
+    bool wordPattern(string pattern, string s)
+    {
         map<char, string> mp;
-        vector<string> strs;
-        string word;
-        for(int i = 0;i < s.size();i++){
-            if(s[i] != ' '){
-                word.push_back(s[i]);
-            }
-            else{
-                strs.push_back(word);
-                word = "";
-            }
+
+        vector<string> collect;
+        stringstream ss(s);
+        string word = "";
+        while (ss >> word)
+        { // use it when we are taking the input.
+            collect.push_back(word);
         }
-        strs.push_back(word);
+        if (pattern.size() != collect.size())
+            return false;
         set<string> st;
-        if(pattern.size() != strs.size()) return false;
-        for(int i = 0;i < pattern.size();i++){
-            if(mp.find(pattern[i]) != mp.end()){
-                if(mp[pattern[i]] == strs[i]){
-                    continue;
-                }
-                else return false;
-            }
-            else{
-                if(st.find(strs[i]) != st.end()){
+        for (int i = 0; i < pattern.size(); i++)
+        {
+            if (mp[pattern[i]] == "")
+            {
+                if (st.find(collect[i]) != st.end())
+                {
                     return false;
                 }
-                mp[pattern[i]] = strs[i];
-                st.insert(strs[i]);
+                mp[pattern[i]] = collect[i];
+                st.insert(collect[i]);
+            }
+            else if (mp[pattern[i]] != collect[i])
+            {
+                return false;
             }
         }
         return true;
