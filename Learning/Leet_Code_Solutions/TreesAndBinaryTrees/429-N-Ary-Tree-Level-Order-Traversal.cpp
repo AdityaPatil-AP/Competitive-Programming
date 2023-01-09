@@ -89,3 +89,102 @@ public:
         return ans;
     }
 };
+
+// 2nd Practice.
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution
+{
+public:
+    // 1) Recursive DFS.
+    //     void helper(Node* root, vector<vector<int>> &ans, int level){
+    //         if(!root) return;
+    //         if(level >= ans.size()){
+    //             ans.push_back({root->val});
+    //         }
+    //         else ans[level].push_back(root->val);
+    //         for(Node* child : root->children){
+    //             helper(child, ans, level + 1);
+    //         }
+    //         return;
+    //     }
+
+    //     vector<vector<int>> levelOrder(Node* root){
+    //         vector<vector<int>> ans;
+    //         if(!root) return ans;
+    //         helper(root, ans, 0);
+    //         return ans;
+    //     }
+
+    // BFS.
+    //     vector<vector<int>> levelOrder(Node* root){
+    //         vector<vector<int>> res;
+    //         if(!root) return res;
+    //         queue<Node*> q;
+    //         q.push(root);
+    //         int level = 0;
+    //         while(!q.empty()){
+    //             int n = q.size();
+    //             res.push_back({});
+    //             for(int i = 0;i < n;i++){
+    //                 Node* curr = q.front();
+    //                 q.pop();
+
+    //                 res[level].push_back(curr->val);
+    //                 for(Node* child : curr->children){
+    //                     if(child){
+    //                         q.push(child);
+    //                     }
+    //                 }
+    //             }
+    //             level++;
+    //         }
+    //         return res;
+    //     }
+
+    // BFS Iterative.
+    vector<vector<int>> levelOrder(Node *root)
+    {
+        vector<vector<int>> res;
+        if (!root)
+            return res;
+        stack<pair<Node *, int>> st;
+        st.push({root, 0});
+        while (!st.empty())
+        {
+            const auto [node, level] = st.top();
+            st.pop();
+
+            if (level >= res.size())
+            {
+                res.push_back({node->val});
+            }
+            else
+                res[level].push_back(node->val);
+
+            for (auto it = (node->children).crbegin(); it != (node->children).crend(); it++)
+            {
+                st.push({*it, level + 1});
+            }
+        }
+        return res;
+    }
+};

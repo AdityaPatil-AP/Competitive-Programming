@@ -17,6 +17,9 @@
         "unordered_set": "cpp",
         "vector": "cpp",
         "*.tcc": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "limits": "cpp"
     }
 }
