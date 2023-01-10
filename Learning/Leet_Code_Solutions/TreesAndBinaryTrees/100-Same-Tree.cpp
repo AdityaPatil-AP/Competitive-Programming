@@ -9,18 +9,23 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if(p == NULL && q == NULL) return true;
-        if(p!= NULL && q != NULL && p->val == q->val){
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        // Goal : To find they are structurally identical.
+        if (!p && !q)
+            return true;
+
+        if (p && q && p->val == q->val)
+        {
             bool leftAns = isSameTree(p->left, q->left);
             bool rightAns = isSameTree(p->right, q->right);
-            if(rightAns == true && leftAns == true) return true;
-            else return false;
-        }
-        else{
+            if (leftAns && rightAns)
+                return true;
             return false;
         }
+        return false;
     }
 };
