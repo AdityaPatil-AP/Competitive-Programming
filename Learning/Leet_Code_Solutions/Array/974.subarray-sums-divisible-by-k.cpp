@@ -1,32 +1,22 @@
 class Solution
 {
 public:
-    int subarraysDivByK(vector<int> &A, int k)
+    int subarraysDivByK(vector<int> &nums, int k)
     {
-        // Brute Force.
-
+        // Prefix Sum + Counting.
         // count of subarrays which are divisible by k.
-        int n = A.size();
-        if (n == 0)
-            return 0;
-
-        int i = 0, count = 0;
-        int curr_sum = 0;
+        int i = 0, count = 0, prefixSum = 0;
         unordered_map<int, int> mp;
-        mp[0] = 1; // this is done because initial cumulative sum = 0 and that sum%k will be equal to 0 always
-
-        while (i < n)
+        mp[0] = 1;
+        while (i < nums.size())
         {
-            curr_sum += A[i++];
-            int rem = curr_sum % K;
-            if (rem < 0)
-                rem += K;
-
-            if (mp.find(rem) != mp.end())
-                count += mp[rem];
-
+            int rem = (((nums[i] + prefixSum) % k) + k) % k;
+            count += mp[rem];
             mp[rem]++;
+            prefixSum += nums[i];
+            i++;
         }
+
         return count;
     }
 };
