@@ -15,34 +15,41 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
-map<int, int> prime_factorization(int n) {
-    map<int, int> mp;
-    while (n % 2 == 0) {
-        mp[2]++;
-        n = n / 2;
-    }
-    for (int i = 3; i <= sqrt(n); i = i + 2) {
-        while (n % i == 0) {
-            mp[i]++;
-            n = n / i;
-        }
-    }
-    if (n > 2)
-        mp[n]++;
-    return mp;
-}
+const int N = 200005;
+long long f[N][2], x[N], y[N];
 
 void work(){
-    // My Try : 
-    ll n, s;
+    // Upsolving.  
+    int i, n, s, j;
     cin >> n >> s;
-    vector<ll> arr(n);
-    for(auto &x : arr) cin >> x;
-    ll ans = 0;
-    ll first = arr[0];
-    for(int i = 1; i < arr.size() - 1;i++){
-        
+    for(int i = 1;i <= n;i++){
+        cin >> j;
+        if(i == 1 || i == n) x[i] = y[i] = j;
+        else if(j <= s) x[i] = 0, y[i] = j;
+        else x[i] = s, y[i] = j - s;
     }
+    f[1][0] = f[1][1] = 0;
+    for(int i = 2;i <= n;i++){
+        f[i][0] = min(f[i - 1][0] + y[i - 1] * x[i], f[i - 1][1] + x[i - 1] * x[i]);
+        f[i][1] = min(f[i - 1][0] + y[i - 1] * y[i], f[i - 1][1] + x[i - 1] * y[i]);
+    }
+
+    cout << f[n][1] << endl;
+
+    // My Try : 
+    // ll n, s;
+    // cin >> n >> s;
+    // vector<ll> arr(n);
+    // for(auto &x : arr) cin >> x;
+    // ll ans = 0;
+    // ll first = arr[0];
+    // for(int i = 1; i < arr.size() - 1;i++){
+    //     ll second = s;
+    //     ans += (first * second);
+    //     first = (arr[i] - s);
+    // }
+    // ans += (first * arr[n - 1]);
+    // cout << ans << endl;
 }
 
 int main(){

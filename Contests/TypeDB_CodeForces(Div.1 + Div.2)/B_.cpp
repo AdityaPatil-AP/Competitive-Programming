@@ -83,36 +83,81 @@ map<int, int> prime_factorization(int n) {
     return mp;
 }
 
+vector<pair<int, int>> prime_factorisation(ll n){
+    vector<pair<int, int>> factors;
+    ll cnt = 0;
+    while(n % 2 == 0){
+        cnt++;
+        n = n/2;
+    }
+    if(cnt != 0)
+        factors.push_back({2, cnt});
+    for(int i = 3;(i * i) <= n;i += 2){
+        ll cnt = 0;
+        while(n % i == 0){
+            cnt++;
+            n /= i;
+        }
+        if(cnt != 0) factors.push_back({i, cnt});
+    }
+
+    if(n > 1) {
+        factors.push_back({n, 1});
+    }
+    return factors;
+}
+
 void work(){
     // My Try : 
+    // ll n;
+    // cin >> n;
+    // auto factors = prime_factorization(n);
+    // // for(auto i : factors){
+    // // 	cout << i.first << " " << i.second << " ";
+    // // }
+    // // cout << endl;
+    // vector<ll> bases(factors.size());
+    // vector<ll> powers(factors.size());
+    // int i = 0;
+    // for(auto it : factors){
+    // 	bases[i] = it.first;
+    // 	powers[i] = it.second;
+    // 	i++;
+    // }
+    // ll count = factors.size();
+    // ll ans = 0;
+    // while(count){
+    // 	ll curr = 1;
+    // 	for(int i = 0;i < bases.size();i++){
+    // 		if(powers[i] != 0){
+    // 			curr *= bases[i];	
+    // 			powers[i]--;
+	// 			if(powers[i] == 0) count--;
+    // 		}
+    // 	}
+    // 	// cout << curr << endl;
+    // 	ans += curr;
+    // }
+    // cout << ans << endl;
+
+    // Upsolving.
     ll n;
     cin >> n;
-    auto factors = prime_factorization(n);
-    // for(auto i : factors){
-    // 	cout << i.first << " " << i.second << " ";
-    // }
-    // cout << endl;
-    vector<ll> bases(factors.size());
-    vector<ll> powers(factors.size());
-    int i = 0;
-    for(auto it : factors){
-    	bases[i] = it.first;
-    	powers[i] = it.second;
-    	i++;
-    }
+    vector<pair<int, int>> factors = prime_factorisation(n);
     ll count = factors.size();
     ll ans = 0;
     while(count){
-    	ll curr = 1;
-    	for(int i = 0;i < bases.size();i++){
-    		if(powers[i] != 0){
-    			curr *= bases[i];	
-    			powers[i]--;
-				if(powers[i] == 0) count--;
-    		}
-    	}
-    	// cout << curr << endl;
-    	ans += curr;
+        ll curr = 1;
+        for(int i = 0;i < factors.size();i++){
+            if(factors[i].second != 0){
+                curr *= factors[i].first;
+                factors[i].second--;
+                if(factors[i].second == 0){
+                    count--;
+                }
+            }
+        }
+        ans += curr;
     }
     cout << ans << endl;
 }
