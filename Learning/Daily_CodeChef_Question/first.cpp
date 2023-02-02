@@ -8,9 +8,7 @@ int main()
     int random = 3;
     vector<int> smaller;
     vector<int> larger;
-    vector<int> answer = flowerStick;
-    sort(answer.begin(), answer.begin() + random);
-    sort(answer.begin() + random, answer.end(), greater<int>());
+
     for (int i = 0; i < random; i++)
     {
         smaller.push_back(flowerStick[i]);
