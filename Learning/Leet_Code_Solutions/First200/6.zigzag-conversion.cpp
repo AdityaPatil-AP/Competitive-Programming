@@ -3,28 +3,51 @@ class Solution
 public:
     string convert(string s, int numRows)
     {
-        // Sort by Row...
+
         if (numRows == 1)
             return s;
-        vector<string> storage(min(numRows, (int)s.size()));
+        int j = 0;
         bool goingDown = false;
-        int currRow = 0;
-        for (char c : s)
+        int i = 0;
+        vector<string> ans(numRows);
+        while (j < s.size())
         {
-            storage[currRow] += c;
-            if (currRow == 0 || currRow == (numRows - 1))
+            if (i == 0 || i == numRows - 1)
             {
                 goingDown = !goingDown;
             }
-            currRow += (goingDown) ? 1 : -1;
+
+            ans[i] += s[j];
+
+            j++;
+            i += (goingDown) ? 1 : -1;
         }
-        string res = "";
-        for (auto row : storage)
+        string answer = "";
+        for (auto it : ans)
         {
-            res += row;
+            answer += it;
         }
 
-        return res;
+        return answer;
+
+        // Sort by Row...
+        //         if(numRows == 1) return s;
+        //         vector<string> storage(min(numRows, (int)s.size()));
+        //         bool goingDown = false;
+        //         int currRow = 0;
+        //         for(char c : s){
+        //             storage[currRow] += c;
+        //             if(currRow == 0 || currRow == (numRows - 1)){
+        //                 goingDown = !goingDown;
+        //             }
+        //             currRow += (goingDown) ? 1 : -1;
+        //         }
+        //         string res = "";
+        //         for(auto row : storage){
+        //             res += row;
+        //         }
+
+        //         return res;
 
         // Visit by Row..
         //         if(numRows == 1) return s;
