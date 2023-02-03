@@ -6,7 +6,7 @@ public:
         map<char, int> mp;
         for (int i = 0; i < 26; i++)
         {
-            mp[order[i]] = i;
+            mp[order[i]] =  i;
         }
 
         bool ans = true;
