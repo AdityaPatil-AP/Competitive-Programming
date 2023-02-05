@@ -3,7 +3,7 @@ class Solution
 public:
     bool checkInclusion(string s1, string s2)
     {
-        map<int, int> mp;
+        unordered_map<int, int> mp;
         for (int i = 0; i < s1.size(); i++)
         {
             mp[s1[i]]++;
@@ -13,7 +13,7 @@ public:
 
         int j = 0;
         int i = 0;
-        map<int, int> mp1;
+        unordered_map<int, int> mp1;
         while (j < s2.size())
         {
             mp1[s2[j]]++;
