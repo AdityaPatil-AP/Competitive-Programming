@@ -16,7 +16,8 @@ const int n = 100000005;
 #define pb push_back
 
 void work(){
-    // My Try : 
+    // My Try : Correct
+
     ll n, c;
     cin >> n >> c;
 

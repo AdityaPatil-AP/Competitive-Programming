@@ -50,11 +50,28 @@ void work(){
     vector<ll> arr(n, 0);
     for(auto &x : arr) cin >> x;
     // Recursion + memoisation.
-    vector<vector<ll>> dp(n,vector<ll>(2, -1e11));
-    // 0 - indicates no change.
-    // 1 - indicates change.
-    ll ans = solve(0, 0, arr, dp);
-    cout << max(ans, dp[0][1]) << endl;
+    // vector<vector<ll>> dp(n,vector<ll>(2, -1e11));
+    // // 0 - indicates no change.
+    // // 1 - indicates change.
+    // ll ans = solve(0, 0, arr, dp);
+    // cout << max(ans, dp[0][1]) << endl;
+
+    ll sum = 0;
+    ll negs = 0;
+    for(int i = 0;i < n;i++){
+        if(arr[i] < 0){
+            negs++;
+            arr[i] = -arr[i];
+        }
+
+        sum += arr[i];
+    }
+    sort(arr.begin(), arr.end());
+
+    if(negs & 1) sum -= (2 * arr[0]);
+
+    cout << sum << endl;
+    return;
 }
 
 int main(){

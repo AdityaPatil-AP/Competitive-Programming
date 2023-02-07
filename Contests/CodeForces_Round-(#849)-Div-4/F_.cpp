@@ -15,7 +15,7 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
-ll update(ll num){
+int update(int num){
     ll sum = 0;
     while(num > 0){
         ll temp = num % 10;
@@ -38,44 +38,83 @@ void work(){
     //     arr[i] = count;
     // }
 
-    vector<ll> operations(n, 0);
-    vector<ll> OperationsTill(n, 0);
+    // My try during the contest.
+    // vector<ll> operations(n, 0);
+    // vector<ll> OperationsTill(n, 0);
+    // for(int i = 0;i < n;i++){
+    //     OperationsTill[i] = i;
+    // }
+    // while(q--){
+    //     // cout << q << endl;
+    //     ll option;
+    //     cin >> option;
+    //     // Update.
+    //     if(option == 1){
+    //         ll l, r;
+    //         cin >> l >> r;
+    //         l--, r--;
+    //         // tillWhere in '0' based indexing.
+    //         ll tillWhere = OperationsTill[l];
+    //         if(tillWhere >= r) continue;
+    //         ll start = l;
+    //         ll end = l;
+    //         for(int i = (tillWhere);i <= r;i++){
+    //             arr[i] = update(arr[i]);
+    //             operations[i]++;
+    //             if(operations[i] >= 3 || arr[i] <= 9){
+    //                 end++;
+    //             }else{
+    //                 for(int i = start;i < end;i++){
+    //                     OperationsTill[i] = end - 1;
+    //                 }
+    //                 start = end + 1;
+    //                 end = start;
+    //             }
+    //         }
+
+    //     }
+    //     else{
+    //         ll x;
+    //         cin >> x;
+    //         cout << arr[x - 1] << endl;
+    //     }
+    // }
+
+    // Upsolving.
+    // Using the idea of sorted list(set) for storing the current active indices( those indices
+    // which haven't been updated more than twice). 
+
+    set<int> s; // set is a sorted list.
     for(int i = 0;i < n;i++){
-        OperationsTill[i] = i;
+        if(arr[i] > 9) s.insert(i);
     }
+
     while(q--){
-        // cout << q << endl;
-        ll option;
-        cin >> option;
-        // Update.
-        if(option == 1){
-            ll l, r;
+        int type;
+        cin >> type;
+
+        if(type == 1){
+            int l, r;
             cin >> l >> r;
             l--, r--;
-            // tillWhere in '0' based indexing.
-            ll tillWhere = OperationsTill[l];
-            if(tillWhere >= r) continue;
-            ll start = l;
-            ll end = l;
-            for(int i = (tillWhere);i <= r;i++){
-                arr[i] = update(arr[i]);
-                operations[i]++;
-                if(operations[i] >= 3 || arr[i] <= 9){
-                    end++;
-                }else{
-                    for(int i = start;i < end;i++){
-                        OperationsTill[i] = end - 1;
-                    }
-                    start = end + 1;
-                    end = start;
-                }
-            }
 
+            int lst = l;
+            while(!s.empty()){
+                auto it = s.lower_bound(lst);
+                if(it == s.end() || (*it) > r) break;
+                arr[*it] = update(arr[*it]);
+                int cur = *it;
+                if(arr[cur] <= 9){
+                    s.erase(cur);
+                }
+
+                lst = cur + 1;
+            }
         }
         else{
-            ll x;
-            cin >> x;
-            cout << arr[x - 1] << endl;
+            int x;
+            cin >> x; x--;
+            cout << arr[x] << endl;
         }
     }
 }
