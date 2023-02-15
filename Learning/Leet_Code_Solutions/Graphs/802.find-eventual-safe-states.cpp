@@ -1,53 +1,62 @@
 class Solution
 {
 public:
-    void dfs(int node, vector<vector<int>> &adj, vector<int> &terminals, vector<int> &visited, vector<int> &ans)
+    bool dfsCheck(int node, vector<vector<int>> &adj, vector<int> &visited, vector<int> &pathVisited,
+                  vector<int> &check)
     {
+        // Important : Here we can see that whenever we return to the same node again and
+        // form a cycle, we don't change the pathVisited array. Therefore those nodes
+        // present in the cycle or connected to the cycle will still be marked as 1.
+        // Because we don't backtrack in that case we directly return.
         visited[node] = 1;
-
-        // we will explore it's neighbours to check if the current node is terminal or not.
-        bool isSafe = true;
+        pathVisited[node] = 1;
+        check[node] = 0;
+        // traverse for adjacent nodes
         for (auto it : adj[node])
         {
-
+            // when the node is not visited.
             if (!visited[it])
             {
-                dfs(it, adj, terminals, visited, ans);
+                if (dfsCheck(it, adj, visited, pathVisited, check) == true)
+                {
+                    check[node] = 0;
+                    return true;
+                }
             }
-            if (terminals[it] == 0)
+            else if (pathVisited[it])
             {
-                isSafe = false;
+                check[node] = 0;
+                return true;
             }
         }
-
-        // If all the neighbours of the current node are terminals, then it is a
-        // safe node.
-        // If there are no edges going from it, then the size of
-        // vector corresponding to that node in adjacency list would be 0.
-        if (isSafe)
-        {
-            ans.push_back(node);
-            terminals[node] = 1;
-        }
-
-        return;
+        check[node] = 1;
+        pathVisited[node] = 0;
+        return false;
     }
 
     vector<int> eventualSafeNodes(vector<vector<int>> &graph)
     {
         int V = graph.size();
-        vector<int> terminals(V, 0);
         vector<int> visited(V, 0);
+        vector<int> pathVisited(V, 0);
+        vector<int> check(V, 0);
 
-        vector<int> ans;
         for (int i = 0; i < V; i++)
         {
             if (!visited[i])
             {
-                dfs(i, graph, terminals, visited, ans);
+                dfsCheck(i, graph, visited, pathVisited, check);
             }
         }
-        sort(ans.begin(), ans.end());
-        return ans;
+
+        vector<int> safeNodes;
+
+        for (int i = 0; i < V; i++)
+        {
+            if (check[i] == 1)
+                safeNodes.push_back(i);
+        }
+
+        return safeNodes;
     }
 };
