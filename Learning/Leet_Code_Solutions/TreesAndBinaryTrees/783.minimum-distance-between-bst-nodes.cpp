@@ -12,25 +12,40 @@
 class Solution
 {
 public:
-    void inorder(vector<int> &arr, TreeNode *root)
+    void inorder(TreeNode *root)
     {
         if (root == NULL)
             return;
-        inorder(arr, root->left);
-        arr.push_back(root->val);
-        inorder(arr, root->right);
+        inorder(root->left);
+        // arr.push_back(root->val);
+        // find the difference with the previous value it is there.
+        if (prevVal != NULL)
+        {
+            minDistance = min(minDistance, root->val - prevVal->val);
+        }
+        prevVal = root;
+
+        inorder(root->right);
         return;
     }
 
+    // With and without using an array.
     int minDiffInBST(TreeNode *root)
     {
-        vector<int> arr;
-        inorder(arr, root);
-        int diff = INT_MAX;
-        for (int i = 1; i < arr.size(); i++)
-        {
-            diff = min(diff, arr[i] - arr[i - 1]);
-        }
-        return diff;
+        // vector<int> arr;
+        // inorder(arr, root);
+        // int diff = INT_MAX;
+        // for(int i = 1;i < arr.size();i++){
+        //     diff = min(diff, arr[i] - arr[i - 1]);
+        // }
+        // return diff;
+
+        // Doing without array.
+        inorder(root);
+        return minDistance;
     }
+
+private:
+    int minDistance = INT_MAX;
+    TreeNode *prevVal = NULL;
 };
