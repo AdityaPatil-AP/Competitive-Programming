@@ -21,8 +21,10 @@ public:
 
         return ans * 8;
     }
+    g
 
-    bool isPossible(long long m, long long neededApples)
+        bool
+        isPossible(long long m, long long neededApples)
     {
         long long int curr = (2 * m * (m + 1) * (2 * m + 1));
         return (curr >= neededApples);
