@@ -19,36 +19,19 @@ void work(){
     // My Try : Correct
     ll n;
     cin >> n;
-    vector<ll> arr(n, 0);
-    for(auto &x : arr) cin >> x;
+    
+    if(n % 2 == 0) cout << "NO" << endl;
+    else{
+        cout << "YES" << endl;
+        int j = 1;
+        for(int i = 2 * n;i > n;i -= 2){
+            cout << i << " " << j++ << endl; 
+        }
 
-    ll l = 0, r = n-1;
-    int mn = 1, mx = n;
-    bool found = false;
-    while(l < r){
-        if(arr[l] == mn){
-            l++;
-            mn++;
-        }
-        else if(arr[r] == mx){
-            r--;
-            mx--;
-        }
-        else if(arr[l] == mx){
-            l++;
-            mx--;
-        }
-        else if(arr[r] == mn){
-            r--;
-            mn++;
-        }
-        else{
-            cout << l + 1 << " " << r + 1 << endl;
-            found = true;
-            break;
+        for(int i = (2*n) - 1;j <= n;j++, i-=2){
+            cout << j << " " << i << endl;
         }
     }
-    if(!found) cout << -1 << endl;
 }
 
 int main(){

@@ -17,38 +17,36 @@ const int n = 100000005;
 
 void work(){
     // My Try : Correct
-    ll n;
-    cin >> n;
-    vector<ll> arr(n, 0);
-    for(auto &x : arr) cin >> x;
+    ll n, x;
+    cin >> n >> x; 
+    ll sum = 0;
+    // l -> first index where non-multiple of x is present.
+    // r -> last index where non-multiple of x is present.
+    // l -> will be updated only once.
+    // r -> will be updated every time.
+    ll l = -1, r = 0;
 
-    ll l = 0, r = n-1;
-    int mn = 1, mx = n;
-    bool found = false;
-    while(l < r){
-        if(arr[l] == mn){
-            l++;
-            mn++;
+    for(int i = 0;i < n;i++){
+        ll a;
+        cin >> a;
+        if(a % x){
+            if(l == -1) l = i;
+            r = i;
         }
-        else if(arr[r] == mx){
-            r--;
-            mx--;
-        }
-        else if(arr[l] == mx){
-            l++;
-            mx--;
-        }
-        else if(arr[r] == mn){
-            r--;
-            mn++;
-        }
-        else{
-            cout << l + 1 << " " << r + 1 << endl;
-            found = true;
-            break;
-        }
+        sum += a;
     }
-    if(!found) cout << -1 << endl;
+
+    if(sum % x != 0) cout << n << endl;
+    else if(l == -1){
+        // indicates no non-multiple of x present.
+        cout << -1 << endl;
+    }
+    else{
+        // There were non-multiples of x present in the array.
+        // We just have to figure out whether to remove the non-multiple 
+        // of x present in the prefix or suffix.
+        cout << max(n - (l + 1), r) << endl;
+    }
 }
 
 int main(){
