@@ -54,10 +54,49 @@ public:
 
         // 3) Delete, In this we move the next index of the word1.
 
+        //         int n = word1.size();
+        //         int m = word2.size();
+
+        //         vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
+        //         return minOperations(0, 0, word1, word2, dp);
+
+        // Bottom Up Approach.
         int n = word1.size();
         int m = word2.size();
 
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
-        return minOperations(0, 0, word1, word2, dp);
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        for (int i = 0; i <= n; i++)
+        {
+            dp[i][m] = n - i;
+        }
+
+        for (int j = 0; j <= m; j++)
+        {
+            dp[n][j] = m - j;
+        }
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int j = m - 1; j >= 0; j--)
+            {
+                if (word1[i] == word2[j])
+                {
+                    dp[i][j] = dp[i + 1][j + 1];
+                }
+                else
+                {
+                    // Insert.
+                    int case1 = 1 + dp[i][j + 1];
+                    // replace
+                    int case2 = 1 + dp[i + 1][j + 1];
+                    // delete.
+                    int case3 = 1 + dp[i + 1][j];
+
+                    dp[i][j] = min(case1, min(case2, case3));
+                }
+            }
+        }
+
+        return dp[0][0];
     }
 };
