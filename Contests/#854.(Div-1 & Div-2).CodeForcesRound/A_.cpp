@@ -26,13 +26,31 @@ void work(){
     // My try :
     ll n, m;
     cin >> n >> m;
+    vector<ll> arr(n, -1);
 
-    vector<ll> arr(n);
-    for(auto &x : arr) cin >> x;
+    map<int, int> present;
 
-    while(m--){
-        
+    // (i + 1) indicates the time gone.
+    int delay = 0;
+    int changeIndex = n - 1;
+    for(int i = 0;i < m;i++){
+        int a;
+        cin >> a;
+        if(present[a] == 1){
+            continue;
+        }
+        present[a] = 1;
+        if(changeIndex >= 0) arr[changeIndex--] = i + 1;
     }
+
+
+    for(auto i : arr){
+        cout << i << " ";
+    }
+
+    cout << endl;
+
+    return;
 }
 
 int main(){

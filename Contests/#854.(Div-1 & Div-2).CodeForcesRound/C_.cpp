@@ -22,17 +22,18 @@ ll lcm(ll a, ll b){
     return ((a * b)/g);
 }
 
+/* stuff you should look for
+ * int overflow, array bounds
+ * special cases (n=1?)
+ * do something instead of nothing and stay organized
+ * WRITE STUFF DOWN
+ * DON'T GET STUCK ON ONE APPROACH
+ */
+
 void work(){
     // My try :
-    ll n, m;
-    cin >> n >> m;
-
-    vector<ll> arr(n);
-    for(auto &x : arr) cin >> x;
-
-    while(m--){
-        
-    }
+    
+    return;
 }
 
 int main(){

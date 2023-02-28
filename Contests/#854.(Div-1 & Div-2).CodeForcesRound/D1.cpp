@@ -22,16 +22,37 @@ ll lcm(ll a, ll b){
     return ((a * b)/g);
 }
 
+bool allEqual(vector<ll> &arr){
+    int first = arr[0];
+    for(int i = 1;i < arr.size();i++){
+        if(arr[i] != first) return false;
+    }
+
+    return true;
+}
+
 void work(){
     // My try :
-    ll n, m;
-    cin >> n >> m;
-
-    vector<ll> arr(n);
+    ll n, k;
+    cin >> n >> k;
+    vector<ll> arr(n, 0);
     for(auto &x : arr) cin >> x;
+    vector<ll> cold(k, 0);
+    for(auto &x : cold) cin >> x;
+    vector<ll> hot(k, 0);
+    for(auto &x : hot) cin >> x;
+    
+    ll ans = 0;
+    int time = 0;
+    int time1 = 0;
+    int time2 = 0;
+    int i = 0;
+    while(true){
+        int fmt = 
+        if(time1 <= time){
 
-    while(m--){
-        
+        }
+
     }
 }
 
