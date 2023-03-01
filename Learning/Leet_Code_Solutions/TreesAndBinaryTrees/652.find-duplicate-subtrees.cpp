@@ -105,7 +105,7 @@ public:
     //         if(!mp.count(triplet)){
     //             mp[triplet] = mp.size() + 1;
     //         }
-    //         int id = mp[triplet];
+    //          int id = mp[triplet];
 
     //         cnt[id]++;
 
