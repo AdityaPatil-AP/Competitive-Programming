@@ -29,13 +29,10 @@ public:
 
     bool isPossible(long long int m, vector<int> &piles, int h)
     {
-        long hr = 0;
+        long long currTime = 0;
         for (auto i : piles)
-        {
-            hr += i / m;
-            if (i % m)
-                hr++;
-        }
-        return (hr <= h);
+            currTime += ceil(double(i) / m);
+
+        return currTime <= h;
     }
 };
