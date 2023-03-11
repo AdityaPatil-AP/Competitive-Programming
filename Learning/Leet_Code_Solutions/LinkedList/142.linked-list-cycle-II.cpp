@@ -25,28 +25,38 @@ public:
         // }
         // return NULL;
 
-        // 2) Using Floyd's Cycle Detection Algorithm.
+        // Using Floyd's Detection Algorithm.
+        if (head == NULL)
+            return NULL;
 
-        ListNode *slow = head, *fast = head;
-        while (slow and fast)
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while (slow && fast)
         {
             slow = slow->next;
             fast = fast->next;
             if (fast)
                 fast = fast->next;
-            if (slow == fast)
+            if (fast == slow)
                 break;
         }
-        if (!slow or !fast)
-            return NULL;
-        slow = head;
-        // If you move from head pointer and a pointer from the meeting point it will always meet, a+b=k(b+c)
 
-        while (slow != fast)
+        // If we reach the end of the linked list then there is no cycle.
+        if (!fast)
+            return NULL;
+
+        // Other wise there is a cycle, we are at a common meeting point.
+        // Now the distance from the head and the common meeting point to the start of the linked list is same.
+        // So we move that much steps ahead.
+
+        ListNode *temp = head;
+        while (temp != slow)
         {
             slow = slow->next;
-            fast = fast->next;
+            temp = temp->next;
         }
-        return slow;
+
+        return temp;
     }
 };
