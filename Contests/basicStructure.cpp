@@ -15,6 +15,14 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
+// GitHub Repository for Large Code Implementations.
+
+// Macros list.
+
+
+
+// You are almost there, Don't stop now.
+
 void work(){
     // My Try :
     // A)
