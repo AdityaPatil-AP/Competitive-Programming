@@ -8,6 +8,8 @@
 using namespace std;
 using namespace std::chrono;
 
+// Macros list.
+
 #define mod 1000000007
 #define ll long long int
 #define PRIME 1000000007
@@ -15,9 +17,12 @@ using namespace std::chrono;
 const int n = 100000005;
 #define pb push_back
 
-// GitHub Repository for Large Code Implementations.
 
-// Macros list.
+
+
+
+
+// GitHub Repository for Large Code Implementations.
 
 
 

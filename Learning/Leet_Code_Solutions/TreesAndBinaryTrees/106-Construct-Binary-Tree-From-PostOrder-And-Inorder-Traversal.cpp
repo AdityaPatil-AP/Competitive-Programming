@@ -11,34 +11,43 @@
  */
 class Solution {
 public:
-    // Tip : use map to store the indexes of values.
-    
-    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        // Index to denote the root of the current Tree
-        int index = postorder.size() - 1;
-        // Used map to store the indexes of values so that we can find them in O(1) time.
-        map<int, int> mp;
-        for(int i = 0;i < inorder.size();i++){
+    // I will get parents from postorder traversal.
+    // I will find the location of the parent in inorder traversal and break it into further right and left subtrees.
+
+    TreeNode *buildTree(vector<int> inorder, vector<int> postorder)
+    {
+        int n = inorder.size();
+        unordered_map<int, int> mp;
+        for (int i = 0; i < n; i++)
+        {
             mp[inorder[i]] = i;
         }
-        // We are building the Tree
-        return buildTree(inorder, postorder, 0, inorder.size() - 1, index, mp);
+        int index = n - 1;
+        return solve(inorder, postorder, 0, n - 1, index, mp);
     }
-    
-    TreeNode* buildTree(vector<int>& inorder, vector<int> &postorder, int start, int end, int &index, map<int, int> &mp){
-        // To denote there is atleast one node in the tree or else return NULL
+
+    TreeNode *solve(vector<int> &inorder, vector<int> &postorder, int start, int end, int &index, unordered_map<int, int> &mp)
+    {
+        // No nodes available
         if(start > end) return NULL;
-        // Creating the root Node  
-        TreeNode* root = new TreeNode(postorder[index]);
-        // Finding the pos of the root->val in the inorder array in O(1) time.
-        int pos = mp[root->val];
-        // Reducing the index to pass the new root to the right Subtree...
+
+        // Current parent.
+        int parent = postorder[index];
+        // Updating the index for the next subtree.
         index--;
-        // Making Recursion Calls to Create the right Subtree first in this case and then the left Subtree 
-        // Because in Preorder traversal - we have root at the last and then before it we have the root of the right Subtree.
-        root->right = buildTree(inorder, postorder, pos + 1, end, index, mp);
-        root->left = buildTree(inorder, postorder, start, pos - 1,index, mp);
-        // Returning the Root as the answer.
+
+        // Finding the position of the parent in the inorder tree.
+        // Because it will help us to separate the left subtree from the right subtree.
+        int idx = mp[parent];
+
+        TreeNode *root = new TreeNode(inorder[idx]);
+
+        // Here we are building the right tree first because in post order traversal.
+        // if we see at the last we have the root node, before that we have the root node of the right subtree.
+        // Therefore we have to first build the right subtree and then the left subtree.
+        root->right = solve(inorder, postorder, idx + 1, end, index, mp);
+        root->left = solve(inorder, postorder, start, idx - 1, index, mp);
+
         return root;
     }
 };
