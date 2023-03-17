@@ -19,6 +19,24 @@ const int n = 100000005;
 
 
 
+int grid[n][m]; // Input Matrix
+
+int dp[n][m]; // Assume value here is -1.
+
+// subproblem : f(i, j) represents minimum sum path from (i, j) to 
+// to (n - 1, m - 1).
+int f(int i , int j){
+    if(i >= n || j >= m)
+        return INT_MAX;
+    if(i == n - 1 && j = m - 1){
+        return grid[n - 1][m - 1];
+    }
+
+    if(dp[i][j] != -1) // this state has been calculated before.
+        return dp[i][j];
+
+    return dp[i][j] = grid[i][j] + min(f(i, j + 1), f(i + 1, j));    
+}
 
 
 
@@ -30,7 +48,7 @@ const int n = 100000005;
 
 void work(){
     // My Try :
-    // A)
+    // A) 
 }
 
 int main(){
