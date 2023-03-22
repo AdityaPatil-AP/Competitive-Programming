@@ -20,9 +20,39 @@ public:
 
         int minDist = 1e9;
         vector<int> visited(n + 1, 0);
-        dfs(1, adjacencyList, minDist, visited);
 
-        return minDist;
+        // Using bfs.
+        queue<int> q;
+
+        int ans = INT_MAX;
+        q.push(1);
+
+        while (!q.empty())
+        {
+            int curr = q.front();
+            q.pop();
+
+            visited[curr] = 1;
+
+            for (auto neighbour : adjacencyList[curr])
+            {
+                int dest = neighbour.first;
+                int dis = neighbour.second;
+
+                ans = min(ans, dis);
+
+                if (!visited[dest])
+                {
+                    q.push(dest);
+                }
+            }
+        }
+
+        return ans;
+
+        //         dfs(1, adjacencyList, minDist, visited);
+
+        //         return minDist;
     }
 
     void dfs(int start, vector<vector<pair<int, int>>> &adjacencyList, int &minDist, vector<int> &visited)
