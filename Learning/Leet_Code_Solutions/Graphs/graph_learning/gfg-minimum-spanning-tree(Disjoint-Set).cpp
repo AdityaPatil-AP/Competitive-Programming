@@ -1,8 +1,6 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class DisjointSet
 {
+public:
     vector<int> rank, parent;
     vector<int> size; // for unionBySize
 
@@ -76,31 +74,57 @@ public:
     }
 };
 
-int main()
+class Solution
 {
-    DisjointSet ds(7);
-    ds.unionBySize(1, 2);
-    ds.unionBySize(2, 3);
-    ds.unionBySize(4, 5);
-    ds.unionBySize(6, 7);
-    ds.unionBySize(5, 6);
-    // let's check whether 3 and 7 belong to the same component or not.
-
-    if (ds.findUPar(3) == ds.findUPar(7))
+public:
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[])
     {
-        cout << "Same\n";
+        // code here
+        // Using Krushkal's Algorithm.
+        vector<pair<int, pair<int, int>>> edges;
+
+        // 1 - 2 wt = 5.
+        // 1 -> (2, 5)
+        // 2 -> (1, 5)
+        // O(N + E)
+        for (int i = 0; i < V; i++)
+        {
+            for (auto it : adj[i])
+            {
+                int adjNode = it[0];
+                int wt = it[1];
+                int node = i;
+
+                edges.push_back({wt, {node, adjNode}});
+            }
+        }
+
+        // We need to sort the edges in order to choose the minimum weight edge first.
+        // O(m*log(m))
+        sort(edges.begin(), edges.end());
+
+        DisjointSet ds(V);
+        int mstWt = 0;
+
+        // O(M*4*alpha)
+        for (auto it : edges)
+        {
+            int wt = it.first;
+            int u = (it.second).first;
+            int v = (it.second).second;
+
+            if (ds.findUPar(u) == ds.findUPar(v))
+            {
+                continue;
+            }
+            else
+            {
+                mstWt += wt;
+                ds.unionBySize(u, v);
+            }
+        }
+
+        return mstWt;
     }
-    else
-        cout << "Not Same\n";
-
-    ds.unionBySize(3, 7);
-
-    if (ds.findUPar(3) == ds.findUPar(7))
-    {
-        cout << "Same\n";
-    }
-    else
-        cout << "Not Same\n";
-
-    return 0;
-}
+};

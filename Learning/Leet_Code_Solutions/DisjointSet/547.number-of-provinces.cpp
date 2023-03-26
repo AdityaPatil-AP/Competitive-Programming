@@ -3,6 +3,7 @@ using namespace std;
 
 class DisjointSet
 {
+public:
     vector<int> rank, parent;
     vector<int> size; // for unionBySize
 
@@ -76,31 +77,37 @@ public:
     }
 };
 
-int main()
+class Solution
 {
-    DisjointSet ds(7);
-    ds.unionBySize(1, 2);
-    ds.unionBySize(2, 3);
-    ds.unionBySize(4, 5);
-    ds.unionBySize(6, 7);
-    ds.unionBySize(5, 6);
-    // let's check whether 3 and 7 belong to the same component or not.
-
-    if (ds.findUPar(3) == ds.findUPar(7))
+public:
+    int findCircleNum(vector<vector<int>> adj)
     {
-        cout << "Same\n";
+        // code here
+        int V = adj.size();
+        DisjointSet ds(V);
+
+        for (int i = 0; i < V; i++)
+        {
+            for (int j = 0; j < V; j++)
+            {
+                // There is an edge between i and j.
+                if (adj[i][j] == 1)
+                {
+                    ds.unionBySize(i, j);
+                }
+            }
+        }
+
+        int cnt = 0;
+
+        for (int i = 0; i < V; i++)
+        {
+            if (ds.parent[i] == i)
+            {
+                cnt++;
+            }
+        }
+
+        return cnt;
     }
-    else
-        cout << "Not Same\n";
-
-    ds.unionBySize(3, 7);
-
-    if (ds.findUPar(3) == ds.findUPar(7))
-    {
-        cout << "Same\n";
-    }
-    else
-        cout << "Not Same\n";
-
-    return 0;
-}
+};
