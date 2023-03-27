@@ -33,66 +33,58 @@ const int n = 100000005;
 // You are almost there, Don't stop now. Great Thing takes time.
 // If you think, there is another idea that may work, go for it as well!!
 
-
 void work(){
     // My Try :
     // A) 
 
-    // int n;
-    // cin >> n;
-    // vector<int> pref(n + 1);
-    // for (int i=0; i<n; i++) {
-    //     int a;
-    //     cin >> a;
-    //     pref[i+1] = pref[i] + a;
-    // }
- 
-    // int l = 1, r = n + 1;
-    // while (l < r) {
-    //     int m = (l + r) / 2;
-    //     cout << "? " << m;
-    //     for (int i=1; i<=m; i++)
-    //         cout << " " << i;
-    //     cout << endl;
-    //     int ret;
-    //     cin >> ret;
-    //     if (ret > pref[m])
-    //         r = m;
-    //     else
-    //         l = m + 1;
-    // }
-    // cout << "! " << l << endl;
+	ll n;
+	cin >> n;
+	vector<ll> arr(n);
+	for(auto &x : arr) cin >> x;
 
-    ll n;
-    cin >> n;
-    vector<ll> pref(n + 1);
-    pref[0] = 0;
-    for(int i = 1;i <= n;i++){
-        ll a;
-        cin >> a;
-        pref[i] = pref[i - 1] + a;
-    }
+    ll diff = *(max_element(arr.begin(), arr.end())) - *(min_element(arr.begin(), arr.end()));
 
-    ll l = 1, r = n, ans = 1;
-    while(l <= r){
-        ll mid = (l + (r - l)/2);
-        cout << "? " << (mid - l + 1) << " ";
-        for(int i = l;i <= mid;i++){
-            cout << i << " ";
-        }
-        cout << endl << flush;
-        ll ret;
-        cin >> ret;
-        if(ret == (pref[mid] - pref[l - 1])){
-            l = mid + 1;
-        }
-        else{
-            r = mid - 1;
-            ans = mid;
-        }
-    }
+	priority_queue<ll> pq1;
+	priority_queue<ll, vector<ll>, greater<ll>> pq2;
 
-    cout << "! " << ans << endl << flush;
+	for(int i = 0;i < arr.size();i++){
+		if(arr[i] >= 0){
+			pq1.push(arr[i]);
+		}
+		else{
+			pq2.push(arr[i]);
+		}
+	}
+
+
+	ll currsum = 0;
+	vector<ll> ans;
+	for(int i = 0;i < n;i++){
+		if(!pq1.empty() && (currsum + pq1.top() < diff)){
+			ans.push_back(pq1.top());
+			currsum += pq1.top();
+			pq1.pop();
+		}
+		else if(!pq2.empty()){
+			ans.push_back(pq2.top());
+			currsum += pq2.top();
+			if(currsum < 0){
+				currsum = 0;
+			}
+			pq2.pop();
+		}
+	}
+
+	if(n != ans.size()){
+		cout << "No" << endl;
+	}
+	else{
+		cout << "Yes" << endl;
+		for(int i = 0;i < ans.size();i++){
+			cout << ans[i] << " ";
+		}
+		cout << endl;
+	}
 }
 
 int main(){

@@ -64,7 +64,7 @@ void work(){
     int cornerEncountered = 0;
     bool found = true;
     string dir = s;
-
+    if(i1 == )
     while(true){
         if(i1 == i2 && j1 == j2){
             break;

@@ -33,66 +33,32 @@ const int n = 100000005;
 // You are almost there, Don't stop now. Great Thing takes time.
 // If you think, there is another idea that may work, go for it as well!!
 
-
 void work(){
     // My Try :
     // A) 
 
-    // int n;
-    // cin >> n;
-    // vector<int> pref(n + 1);
-    // for (int i=0; i<n; i++) {
-    //     int a;
-    //     cin >> a;
-    //     pref[i+1] = pref[i] + a;
-    // }
- 
-    // int l = 1, r = n + 1;
-    // while (l < r) {
-    //     int m = (l + r) / 2;
-    //     cout << "? " << m;
-    //     for (int i=1; i<=m; i++)
-    //         cout << " " << i;
-    //     cout << endl;
-    //     int ret;
-    //     cin >> ret;
-    //     if (ret > pref[m])
-    //         r = m;
-    //     else
-    //         l = m + 1;
-    // }
-    // cout << "! " << l << endl;
-
     ll n;
     cin >> n;
-    vector<ll> pref(n + 1);
-    pref[0] = 0;
-    for(int i = 1;i <= n;i++){
-        ll a;
-        cin >> a;
-        pref[i] = pref[i - 1] + a;
-    }
+    vector<ll> arr(n);
+    vector<ll> b(n);
+    for(auto &x : arr) cin >> x;
+    for(auto &x : b) cin >> x;
 
-    ll l = 1, r = n, ans = 1;
-    while(l <= r){
-        ll mid = (l + (r - l)/2);
-        cout << "? " << (mid - l + 1) << " ";
-        for(int i = l;i <= mid;i++){
-            cout << i << " ";
-        }
-        cout << endl << flush;
-        ll ret;
-        cin >> ret;
-        if(ret == (pref[mid] - pref[l - 1])){
-            l = mid + 1;
-        }
-        else{
-            r = mid - 1;
-            ans = mid;
+    for(int i = 0;i < n;i++){
+        if(arr[i] > b[i]){
+            swap(arr[i], b[i]);
         }
     }
 
-    cout << "! " << ans << endl << flush;
+    ll max_a = *(max_element(arr.begin(), arr.end()));
+    ll max_b = *(max_element(b.begin(), b.end()));
+
+    if(max_a == arr[n - 1] && max_b == b[n - 1]){
+        cout << "Yes" << endl;
+    }
+    else{
+        cout << "No" << endl;
+    }
 }
 
 int main(){
