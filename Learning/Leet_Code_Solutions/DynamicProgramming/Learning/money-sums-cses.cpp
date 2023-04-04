@@ -42,7 +42,7 @@ int main()
                     curr[newval] = true;
                 }
 
-                // not_take.
+                // not+_take.
                 if (val >= 0)
                     curr[val] = true;
             }
