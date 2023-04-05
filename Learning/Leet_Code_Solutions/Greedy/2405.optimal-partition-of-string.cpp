@@ -1,3 +1,32 @@
+// Optimal Solution.
+
+class Solution
+{
+public:
+    int partitionString(string s)
+    {
+        vector<int> mp(26, -1);
+        int cnt = 1;
+        int substringStart = 0;
+
+        for (int i = 0; i < s.size(); i++)
+        {
+            if (mp[s[i] - 'a'] < substringStart)
+            {
+                mp[s[i] - 'a'] = i;
+            }
+            else
+            {
+                cnt++;
+                substringStart = i;
+                mp[s[i] - 'a'] = i;
+            }
+        }
+
+        return cnt;
+    }
+};
+
 class Solution
 {
 public:
