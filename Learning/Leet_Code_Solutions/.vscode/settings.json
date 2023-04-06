@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.js": "javascript",
         "ostream": "cpp",
         "list": "cpp",
         "iostream": "cpp",
@@ -20,6 +21,7 @@
         "set": "cpp",
         "chrono": "cpp",
         "random": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "type_traits": "cpp"
     }
 }
