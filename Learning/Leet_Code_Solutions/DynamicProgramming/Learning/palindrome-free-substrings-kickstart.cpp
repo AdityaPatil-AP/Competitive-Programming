@@ -15,9 +15,9 @@ int helper(string prev, int index, string s, vector<map<string, int>> &dp)
 
     if (index == s.size())
     {
-        return true;
+        return 1;
     }
-    if (dp[index].find({prev}) != dp[index].end())
+    if (dp[index].find(prev) != dp[index].end())
     {
         return dp[index][prev];
     }
@@ -66,6 +66,8 @@ int main()
     // test case constraints are 5 * (10^4).
     // in such cases uses recursive dp because you don't go
     // and compute unnecessary states.
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     ll t;
     cin >> t;
     for (int i = 1; i <= t; i++)
