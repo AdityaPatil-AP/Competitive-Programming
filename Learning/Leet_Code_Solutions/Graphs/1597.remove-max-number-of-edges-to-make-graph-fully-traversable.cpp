@@ -65,7 +65,7 @@ public:
             }
         }
 
-        // Perform union for Alice if type = 1 and for Bob if type = 2.
+        // Perform union for Alice if type = 1 and for Bob if type = 2. Hello
         for (vector<int>& edge : edges) {
             if (edge[0] == 1) {
                 edgesRequired += Alice.performUnion(edge[1], edge[2]);
@@ -78,7 +78,7 @@ public:
         if (Alice.isConnected() && Bob.isConnected()) {
             return edges.size() - edgesRequired;
         }
-        
+
         return -1;
     }
 };
