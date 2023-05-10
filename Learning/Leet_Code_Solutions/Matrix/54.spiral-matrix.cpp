@@ -39,7 +39,7 @@ public:
             }
             rowend--;
 
-            // up.
+            //  up.
             if (colend < colstart)
                 break;
             for (int i = rowend; i >= rowstart; i--)

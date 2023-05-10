@@ -42,7 +42,7 @@ public:
 
             if (colend < colstart)
                 break;
-            // up
+            //  up
             for (int i = rowend; i >= rowstart; i--)
             {
                 matrix[i][colstart] = number++;
