@@ -1,35 +1,38 @@
 class Solution
 {
-    unordered_map<string, vector<pair<string, double>>> adjList;
-    unordered_map<string, bool> visited;
+    unordered_map<string, vector<pair<string, double>>> adjList; // To map the given string -> to strings which are directly
+    // connected to them with a value. (ai/bi).
+    // -> bool array to detect and avoid a loop while traversing so re-visiting of nodes is not allowed.
+    unordered_map<string, bool> vis;
     double queryAns;
 
 public:
+    // dfs will store the queryAns, as well as return true if -> endNode is reachable.
+    // or else false.
     bool dfs(string startNode, string endNode, double runningProduct)
     {
-
-        if (startNode == endNode and adjList.find(startNode) != adjList.end())
+        if (startNode == endNode && adjList.find(startNode) != adjList.end())
         {
             queryAns = runningProduct;
             return true;
         }
 
+        vis[startNode] = true;
         bool tempAns = false;
-        visited[startNode] = true;
 
         for (int i = 0; i < adjList[startNode].size(); i++)
         {
-            if (!visited[adjList[startNode][i].first])
+            if (!vis[adjList[startNode][i].first])
             {
                 tempAns = dfs(adjList[startNode][i].first, endNode, runningProduct * adjList[startNode][i].second);
-                if (tempAns)
+                if (tempAns == true)
                 {
                     break;
                 }
             }
         }
 
-        visited[startNode] = false;
+        vis[startNode] = false;
 
         return tempAns;
     }
@@ -42,22 +45,25 @@ public:
 
         for (int i = 0; i < n; i++)
         {
-
             adjList[equations[i][0]].push_back({equations[i][1], values[i]});
             adjList[equations[i][1]].push_back({equations[i][0], 1 / values[i]});
-            visited[equations[i][0]] = false;
-            visited[equations[i][1]] = false;
+
+            vis[equations[i][0]] = false;
+            vis[equations[i][1]] = false;
         }
 
         for (int i = 0; i < m; i++)
         {
-
             queryAns = 1;
-            bool pathFound = dfs(queries[i][0], queries[i][1], 1);
-            if (pathFound)
+            bool found = dfs(queries[i][0], queries[i][1], 1);
+            if (found)
+            {
                 ans[i] = queryAns;
+            }
             else
+            {
                 ans[i] = -1;
+            }
         }
 
         return ans;
