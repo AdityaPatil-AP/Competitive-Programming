@@ -1,38 +1,42 @@
 class Solution
 {
 private:
-    int helper(int i, int j, vector<int> &cuts, vector<vector<int>> &dp)
-    {
-
-        if (i > j)
-            return 0;
-
-        if (dp[i][j] != -1)
-            return dp[i][j];
-
-        int minm = INT_MAX;
-
-        for (int ind = i; ind <= j; ind++)
-        {
-
-            int cost = cuts[j + 1] - cuts[i - 1] + helper(i, ind - 1, cuts, dp) + helper(ind + 1, j, cuts, dp);
-            minm = min(minm, cost);
-        }
-
-        return dp[i][j] = minm;
-    }
-
 public:
     int minCost(int n, vector<int> &cuts)
     {
-
-        int c = cuts.size();
-        cuts.insert(cuts.begin(), 0);
+        int m = cuts.size();
+        cuts.push_back(0);
         cuts.push_back(n);
-
         sort(cuts.begin(), cuts.end());
-        vector<vector<int>> dp(c + 1, vector<int>(c + 1, -1));
 
-        return helper(1, c, cuts, dp);
+        vector<vector<int>> dp(m + 2, vector<int>(m + 2, -1));
+
+        int ans = helper(0, m + 1, cuts, dp);
+
+        return ans;
+    }
+
+    int helper(int start, int end, vector<int> &cuts, vector<vector<int>> &dp)
+    {
+        // Base Case
+        if ((start + 1) == end)
+        {
+            return 0;
+        }
+
+        if (dp[start][end] != -1)
+        {
+            return dp[start][end];
+        }
+
+        int ans = INT_MAX;
+
+        for (int i = start + 1; i < end; i++)
+        {
+            int cost = helper(start, i, cuts, dp) + helper(i, end, cuts, dp) + (cuts[end] - cuts[start]);
+            ans = min(ans, cost);
+        }
+
+        return dp[start][end] = ans;
     }
 };
