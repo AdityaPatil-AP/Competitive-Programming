@@ -82,7 +82,7 @@ class Solution
 public:
     int findCircleNum(vector<vector<int>> adj)
     {
-        // code here
+        // code  here
         int V = adj.size();
         DisjointSet ds(V);
 
@@ -90,7 +90,7 @@ public:
         {
             for (int j = 0; j < V; j++)
             {
-                // There is an edge between i and j.
+                // There is an  edge between i and j.
                 if (adj[i][j] == 1)
                 {
                     ds.unionBySize(i, j);
