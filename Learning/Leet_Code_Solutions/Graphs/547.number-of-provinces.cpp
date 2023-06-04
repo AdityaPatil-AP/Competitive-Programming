@@ -1,11 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class DisjointSet
 {
 public:
     vector<int> rank, parent;
-    vector<int> size; // for unionBySize
+    vector<int> size; // unionBySize.
 
 public:
     DisjointSet(int n)
@@ -34,11 +31,10 @@ public:
         int ulp_u = findUPar(u);
         int ulp_v = findUPar(v);
 
-        if (ulp_u == ulp_v)
+        if (ulp_v == ulp_u)
         {
             return;
         }
-
         if (rank[ulp_u] < rank[ulp_v])
         {
             parent[ulp_u] = ulp_v;
@@ -59,7 +55,7 @@ public:
         int ulp_u = findUPar(u);
         int ulp_v = findUPar(v);
 
-        if (ulp_u == ulp_v)
+        if (ulp_v == ulp_u)
         {
             return;
         }
@@ -69,6 +65,7 @@ public:
             parent[ulp_v] = ulp_u;
             size[ulp_u] += size[ulp_v];
         }
+
         else
         {
             parent[ulp_u] = ulp_v;
@@ -82,25 +79,23 @@ class Solution
 public:
     int findCircleNum(vector<vector<int>> adj)
     {
-        // code  here
-        int V = adj.size();
-        DisjointSet ds(V);
+        int v = adj.size();
+        DisjointSet ds(v);
 
-        for (int i = 0; i < V; i++)
+        for (int i = 0; i < v; i++)
         {
-            for (int j = 0; j < V; j++)
+            for (int j = 0; j < v; j++)
             {
-                // There is an  edge between i and j.
                 if (adj[i][j] == 1)
                 {
-                    ds.unionBySize(i, j);
+                    ds.unionByRank(i, j);
                 }
             }
         }
 
         int cnt = 0;
 
-        for (int i = 0; i < V; i++)
+        for (int i = 0; i < v; i++)
         {
             if (ds.parent[i] == i)
             {
