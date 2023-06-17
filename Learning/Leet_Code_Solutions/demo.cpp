@@ -77,14 +77,43 @@ vector<int> getPrefixScores(vector<int> &arr)
 //     return answer;
 // }
 
+int countValidKeys(long long num)
+{
+    long long m = 1;
+    while (m * m <= num)
+    {
+        m++;
+    }
+
+    return (m - 2);
+}
+
+vector<int> helper(vector<long long> keys)
+{
+    vector<int> ans;
+    for (int i = 0; i < keys.size(); i++)
+    {
+        ans.push_back(countValidKeys(keys[i]));
+    }
+
+    return ans;
+}
+
 int main()
 {
-    vector<int> words = {1, 2, 1};
-    vector<int> ans = getPrefixScores(words);
-    for (auto i : ans)
+    // vector<int> words = {1, 2, 1};
+    // vector<int> ans = getPrefixScores(words);
+    // for (auto i : ans)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+    vector<long long> keys = {10000003, 10382, 381835151435213, 1384813281, 1341351315342};
+    vector<int> count = helper(keys);
+
+    for (auto i : count)
     {
-        cout << i << " ";
+        cout << i << endl;
     }
-    cout << endl;
     return 0;
 }
