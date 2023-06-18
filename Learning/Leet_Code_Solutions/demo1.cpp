@@ -54,13 +54,15 @@ vector<string> helper(string &text, int k)
 
 int main()
 {
-    string text = "hello the a a the the is ohkay ohkay hello";
-    vector<string> ans = helper(text, 2);
+    // string text = "hello the a a the the is ohkay ohkay hello";
+    // vector<string> ans = helper(text, 2);
 
-    for (auto i : ans)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
+    // for (auto i : ans)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    cout << (1 << 0) << endl;
     return 0;
 }
