@@ -1,60 +1,55 @@
-class Solution {
-private:
-
-int check(int curr, int left, vector<int>& arr1 ,vector<int>& arr2, vector <unordered_map<int,int> >& dp)
+class Solution
 {
-          if (curr == arr1.size())
-            return 0;
-
-          if (dp[curr].find(left) != dp[curr].end())
-            return dp[curr][left];
-
-          int exclude,include;
-
-        // exclude stores the no. of ways for making array strictly 
-       // increasing when not replacing the current element 
-
-     // include stores the no. of ways for making the array strictly
-    // increasing after replacing the current element
-
-
-        if (arr1[curr] > left)    
-            exclude = check(curr+1, arr1[curr], arr1, arr2, dp);
-    
-         else
-            exclude = INT_MAX;
-
-         int rep = upper_bound(arr2.begin(),arr2.end(), left) - arr2.begin();
-
-           if (rep == arr2.size())
-             include = INT_MAX;
-
-           else
-            include = check(curr+1, arr2[rep], arr1, arr2, dp);
-
-             if (include == INT_MAX)
-                dp[curr][left] = exclude;
-
-             else
-                dp[curr][left] = min(exclude,include+1);
-
-    return dp[curr][left];
-}
-
 public:
-    int makeArrayIncreasing(vector<int>& arr1, vector<int>& arr2) {
-        
-           sort(arr2.begin(), arr2.end());
-           vector <unordered_map<int,int> > dp(2001);  
+    // map<pair<int, int>, int> mp;
+    int dp[2001][2001][2];
 
-           int val = check(0, INT_MIN, arr1, arr2, dp);
+    int makeArrayIncreasing(vector<int> &arr1, vector<int> &arr2)
+    {
+        sort(arr2.begin(), arr2.end());
+        memset(dp, -1, sizeof(dp));
 
-        // if the value is INT_MAX than that means the array can not
-      //   be strictly increasing by replacing any number of element
+        int ans = dfs(0, 0, true, arr1, arr2);
 
-            if (val == INT_MAX)
-                return -1;
+        return (ans < 2001) ? ans : -1;
+    }
 
-        return val;
+    int dfs(int index, int j, bool prev_arr1, vector<int> &arr1, vector<int> &arr2)
+    {
+        if (index == arr1.size())
+        {
+            return 0;
+        }
+
+        // if(mp.find(make_pair(index, prev)) != mp.end()){
+        //     return mp[make_pair(index, prev)];
+        // }
+
+        if (dp[index][j][prev_arr1] != -1)
+        {
+            return dp[index][j][prev_arr1];
+        }
+
+        int cost = 1e9;
+        int prev = prev_arr1 ? index == 0 ? INT_MIN : arr1[index - 1] : arr2[j];
+
+        // leave and don't change.
+        if (arr1[index] > prev)
+        {
+            cost = dfs(index + 1, j, true, arr1, arr2);
+        }
+
+        // Change.
+
+        // 1) Either (arr1[i] < prev). Due to which we have to change arr1[i].
+        // 2) or else we want a smaller value for this i in arr1. So we check for it in arr2.
+        int idx = upper_bound(arr2.begin(), arr2.end(), prev) - arr2.begin();
+
+        if (idx < arr2.size())
+        {
+            cost = min(cost, 1 + dfs(index + 1, idx, false, arr1, arr2));
+        }
+
+        return dp[index][j][prev_arr1] = cost;
     }
 };
