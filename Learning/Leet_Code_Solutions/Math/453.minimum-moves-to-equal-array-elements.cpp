@@ -4,7 +4,6 @@ public:
     int minMoves(vector<int> &nums)
     {
         // Find the difference of the largest with everyone else.
-        int n = nums.size();
 
         long long mini = *min_element(nums.begin(), nums.end()) * n;
 
