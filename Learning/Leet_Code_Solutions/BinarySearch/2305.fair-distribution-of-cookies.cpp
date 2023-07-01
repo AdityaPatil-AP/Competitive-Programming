@@ -60,34 +60,43 @@ public:
 
         int size = cookies.size();
 
-        vector<vector<int>> dp(k, vector<int>(1 << size));
-        vector<int> sum(1 << size);
+        vector<vector<int>> dp(k + 1, vector<int>(1ll << size, INT_MAX));
+        vector<int> sum(1ll << size);
 
-        for (int i = 0; i < (1 << size); i++)
+        for (int mask = 0; mask < (1 << size); mask++)
         {
+            int total = 0;
             for (int j = 0; j < size; j++)
             {
-                if (i >> j & 1)
-                    sum[i] += cookies[j];
+                if (mask & (1 << j))
+                {
+                    total += cookies[j];
+                }
             }
+            sum[mask] = total;
         }
 
-        dp[0] = sum;
-
-        for (int i = 1; i < k; i++)
+        dp[0][0] = 0;
+        for (int person = 1; person <= k; person++)
         {
-            for (int j = 0; j < (1 << size); j++)
+            for (int mask = 0; mask < (1ll << size); mask++)
             {
-                dp[i][j] = INT_MAX;
-                for (int sub = j, max_cost; sub; sub = (sub - 1) & j)
+                for (int submask = mask; submask; submask = (submask - 1) & mask)
                 {
-                    max_cost = max(dp[i - 1][j ^ sub], sum[sub]);
-                    dp[i][j] = min(dp[i][j], max_cost);
+                    dp[person][mask] = min(dp[person][mask], max(sum[submask], dp[person - 1][mask ^ submask]));
                 }
             }
         }
 
-        return dp[k - 1].back();
+        // for(int person = 1;person <= k;person++){
+        //     for(int mask = 0;mask < (1 << size);mask++){
+        //         for(int submask=mask;submask;submask=(submask - 1)&mask){
+        //             dp[person][mask] = min(dp[person][mask], max(sum[submask], dp[person - 1][mask ^ submask]));
+        //         }
+        //     }
+        // }
+
+        return dp[k][(1 << size) - 1];
 
         // Using Backtracking.
         // vector<int> distribute(k, 0);
